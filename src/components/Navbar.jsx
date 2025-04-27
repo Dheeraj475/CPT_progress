@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserCircle, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
-import '../assets/Navbar.css'; // Make sure CSS is updated too
+import '../assets/Navbar.css';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -16,7 +16,12 @@ const Navbar = () => {
   }, []);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
   };
 
   return (
@@ -53,7 +58,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
+      {menuOpen && <div className="overlay" onClick={closeMenu}></div>}
     </header>
   );
 };
