@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserCircle, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
-import '../assets/Navbar.css';
+import { FaUserCircle, FaShoppingCart, FaBars, FaTimes, FaSearch } from 'react-icons/fa';
+import '../assets/Navbar.css'; // Keep your custom styles if needed
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,12 +17,18 @@ const Navbar = () => {
   }, []);
 
   const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
+    setMenuOpen(prev => !prev);
+    setDropdownOpen(false); // Close dropdown when opening mobile menu
   };
 
   const closeMenu = () => {
     setMenuOpen(false);
     setDropdownOpen(false);
+    setSearchOpen(false);
+  };
+
+  const toggleSearch = () => {
+    setSearchOpen(prev => !prev);
   };
 
   return (
@@ -30,6 +37,12 @@ const Navbar = () => {
         <div className="site-logo">WallVish Decor</div>
       </div>
 
+      {/* Search Input - Desktop */}
+      <div className={`search-bar ${searchOpen ? 'active' : ''}`}>
+        <input type="text" placeholder="Search wallpapers, paints, decor..." />
+      </div>
+
+      {/* Menu Items - Desktop */}
       <nav className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
         <div
           className="menu-item"
@@ -50,7 +63,9 @@ const Navbar = () => {
         <div className="menu-item">New Arrivals</div>
       </nav>
 
+      {/* Icons Section */}
       <div className="navbar-icons">
+        <FaSearch className="icon" onClick={toggleSearch} />
         <FaUserCircle className="icon" />
         <FaShoppingCart className="icon" />
         <div className="hamburger" onClick={toggleMenu}>
@@ -58,6 +73,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
       {menuOpen && <div className="overlay" onClick={closeMenu}></div>}
     </header>
   );
