@@ -22,7 +22,7 @@
     text-align: center;
   }
   
-  .hero-content h1 {
+  .hero-content h1, button {
     font-size: 3rem;
     margin-bottom: 20px;
     opacity: 0;

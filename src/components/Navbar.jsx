@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-left">
-        <div className="navbar-logo">WallVish</div>
+        <div className="navbar-logo">WallVish Decor</div>
         {!scrolled && (
           <input
             type="text"
