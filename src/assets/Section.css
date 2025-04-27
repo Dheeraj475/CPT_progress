@@ -1,0 +1,69 @@
+.hero {
+    height: 90vh;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* Dummy bg */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    opacity: 0;
+    animation: fadeInHero 1.5s ease forwards;
+  }
+  
+  @keyframes fadeInHero {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .shop-button {
+    padding: 12px 30px;
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+  }
+  
+  .shop-button:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive for Mobile */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+  
+    .shop-button {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+  
