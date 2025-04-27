@@ -1,8 +1,9 @@
 .hero {
     height: 90vh;
-    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* Dummy bg */
+    background-image: url('data:image/svg+xml;base64,...'); /* Base64 encoded low-quality placeholder image */
     background-size: cover;
     background-position: center;
+    background-color: #333; /* Fallback color while loading */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,6 +11,11 @@
     text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
     opacity: 0;
     animation: fadeInHero 1.5s ease forwards;
+    transition: background-image 1s ease; /* Smooth transition for image change */
+  }
+  
+  .hero.loaded {
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* High-quality image */
   }
   
   @keyframes fadeInHero {
