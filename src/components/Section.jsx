@@ -6,7 +6,7 @@ const Section = () => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c'; // Your high-quality image URL
+    img.src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c'; // High-quality image
     img.onload = () => {
       setImageLoaded(true);
     };
