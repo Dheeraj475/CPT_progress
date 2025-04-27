@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../assets/Navbar.css'; // Import the CSS file for styling
+import { FaUserCircle, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import '../assets/Navbar.css'; // Make sure CSS is updated too
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,25 +15,46 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <div className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+    <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-left">
-        <div className="navbar-logo">WallVish Decor</div>
-        {!scrolled && (
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search products..."
-          />
-        )}
+        <div className="site-logo">WallVish Decor</div>
       </div>
-      <div className="navbar-menu">
-        <span className="menu-item">Wallpaper</span>
-        <span className="menu-item">Paint</span>
-        <span className="menu-item">Home Decor</span>
-        <span className="menu-item">New Arrivals</span>
+
+      <nav className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
+        <div
+          className="menu-item"
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+        >
+          Wallpaper
+          {dropdownOpen && (
+            <div className="dropdown-menu">
+              <span>Feature Walls</span>
+              <span>Patterns</span>
+              <span>Textures</span>
+            </div>
+          )}
+        </div>
+        <div className="menu-item">Paint</div>
+        <div className="menu-item">Home Decor</div>
+        <div className="menu-item">New Arrivals</div>
+      </nav>
+
+      <div className="navbar-icons">
+        <FaUserCircle className="icon" />
+        <FaShoppingCart className="icon" />
+        <div className="hamburger" onClick={toggleMenu}>
+          {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </div>
       </div>
-    </div>
+
+      {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
+    </header>
   );
 };
 
