@@ -1,0 +1,120 @@
+.site-footer {
+    background-color: #f7f7f7;
+    padding: 3rem 1rem 2rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .footer-links h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links ul li {
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .footer-links ul li:hover {
+    color: #5c7c45;
+    text-decoration: underline;
+  }
+  
+  .newsletter input[type="email"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .newsletter button {
+    background-color: #5c7c45;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .newsletter button:hover {
+    background-color: #4c6839;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #ccc;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: #555;
+  }
+  
+  /* Social Media Icons */
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .social-icons a {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: #000;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+    background: #5c7c45;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-links {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footer-links > div {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .newsletter input[type="email"] {
+      width: 100%;
+    }
+  }
+  

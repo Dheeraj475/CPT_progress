@@ -5,6 +5,8 @@ import Section from './components/Section';
 import FeatureGrid from './components/FeatureGrip';
 import SustainabilityReport from './components/SustainabilityReport';
 import Reading from './components/Reading';
+import GoogleReviews from './components/GoogleReviews';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <FeatureGrid />
         <SustainabilityReport/>
         <Reading/>
+        <GoogleReviews/>
+        <Footer/>
       </div>
     </>
   )
