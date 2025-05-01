@@ -1,81 +1,91 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserCircle, FaShoppingCart, FaBars, FaTimes, FaSearch } from 'react-icons/fa';
-import '../assets/Navbar.css'; // Keep your custom styles if needed
+import {
+  FaUserCircle,
+  FaShoppingCart,
+  FaBars,
+  FaTimes,
+  FaSearch
+} from 'react-icons/fa';
+import '../assets/Navbar.css';
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setMenuOpen(prev => !prev);
-    setDropdownOpen(false); // Close dropdown when opening mobile menu
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-    setDropdownOpen(false);
-    setSearchOpen(false);
-  };
-
-  const toggleSearch = () => {
-    setSearchOpen(prev => !prev);
-  };
-
   return (
-    <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
-      <div className="navbar-left">
-        <div className="site-logo">WallVish Decor</div>
-      </div>
+    <>
+      <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        {/* TOP ROW: logo / search / icons */}
+        <div className="navbar-top">
+          <div className="logo">WallVish Decor</div>
 
-      {/* Search Input - Desktop */}
-      <div className={`search-bar ${searchOpen ? 'active' : ''}`}>
-        <input type="text" placeholder="Search wallpapers, paints, decor..." />
-      </div>
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search wallpapers, paints, decor..."
+            />
+            <FaSearch className="search-icon" />
+          </div>
 
-      {/* Menu Items - Desktop */}
-      <nav className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
-        <div
-          className="menu-item"
-          onMouseEnter={() => setDropdownOpen(true)}
-          onMouseLeave={() => setDropdownOpen(false)}
-        >
-          Wallpaper
-          {dropdownOpen && (
-            <div className="dropdown-menu">
-              <span>Feature Walls</span>
-              <span>Patterns</span>
-              <span>Textures</span>
+          <div className="icons">
+            <FaUserCircle className="icon" />
+            <FaShoppingCart className="icon" />
+            <div
+              className="hamburger"
+              onClick={() => setMenuOpen(open => !open)}
+            >
+              {menuOpen
+                ? <FaTimes className="icon" />
+                : <FaBars className="icon" />
+              }
             </div>
-          )}
+          </div>
         </div>
-        <div className="menu-item">Paint</div>
-        <div className="menu-item">Home Decor</div>
-        <div className="menu-item">New Arrivals</div>
-      </nav>
 
-      {/* Icons Section */}
-      <div className="navbar-icons">
-        <FaSearch className="icon" onClick={toggleSearch} />
-        <FaUserCircle className="icon" />
-        <FaShoppingCart className="icon" />
-        <div className="hamburger" onClick={toggleMenu}>
-          {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        {/* BOTTOM ROW: category links */}
+        <nav className="navbar-bottom">
+          {[
+            'WALLPAPER',
+            'PAINT',
+            'WALL MURALS',
+            'CURTAINS',
+            'BLINDS',
+            'HOME FURNISHINGS',
+            'BLOGS & TUTORIALS'
+          ].map(label => (
+            <div key={label} className="nav-item">
+              {label}
+            </div>
+          ))}
+        </nav>
+      </header>
+
+      {/* MOBILE SLIDE-IN MENU */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          {[
+            'WALLPAPER',
+            'PAINT',
+            'WALL MURALS',
+            'CURTAINS',
+            'BLINDS',
+            'HOME FURNISHINGS',
+            'BLOGS & TUTORIALS'
+          ].map(label => (
+            <div key={label} className="mobile-item">
+              {label}
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {menuOpen && <div className="overlay" onClick={closeMenu}></div>}
-    </header>
+      )}
+    </>
   );
 };
 

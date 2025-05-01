@@ -1,13 +1,10 @@
-/* Preload the high-quality image */
-@import url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* Preload the image */
-
 /* Hero Section Styling */
 .hero {
   height: 90vh;
-  background-image: url('data:image/svg+xml;base64,...'); /* Base64 encoded low-quality image */
+  background-image: url('data:image/svg+xml;base64,...'); /* Placeholder LQ image */
   background-size: cover;
   background-position: center;
-  background-color: #333; /* Solid color fallback */
+  background-color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,24 +12,23 @@
   text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
   opacity: 0;
   animation: fadeInHero 1.5s ease forwards;
-  transition: background-image 0.5s ease; /* Smooth image transition */
+  transition: background-image 0.5s ease;
 }
 
 .hero.loaded {
-  background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* High-quality image */
+  background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');
 }
 
 @keyframes fadeInHero {
-  to {
-    opacity: 1;
-  }
+  to { opacity: 1; }
 }
 
 .hero-content {
   text-align: center;
 }
 
-.hero-content h1, button {
+.hero-content h1,
+.hero-content button {
   font-size: 3rem;
   margin-bottom: 20px;
   opacity: 0;
@@ -65,14 +61,115 @@
   transform: scale(1.05);
 }
 
-/* Responsive for Mobile */
+/* — Hero section unchanged, keep yours above... */
+
+
+/* ————— Collaboration Section Styling ————— */
+.collaboration-section {
+  background-color: #5c554e;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.collaboration-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 1) Graham & Brown with EST on same baseline */
+.brand-line {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.graham {
+  font-family: 'Georgia', serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  margin: 0;
+}
+
+.establish {
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+/* 2) X */
+.brand-x {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+/* 3) Sensory Home line */
+.sensory-line {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 4) Description */
+.collaboration-description {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  padding: 0 10px;
+}
+
+/* 5) Shop button – reuse your existing style */
+.shop-button {
+  padding: 14px 36px;
+  font-size: 1rem;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+.shop-button:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.05);
+}
+
+
+/* ——— Responsive tweaks ——— */
 @media (max-width: 768px) {
-  .hero-content h1 {
+  .brand-line {
+    gap: 0.5rem;
+  }
+
+  .graham {
     font-size: 2rem;
   }
 
+  .establish {
+    font-size: 0.85rem;
+  }
+
+  .brand-x {
+    font-size: 1.5rem;
+  }
+
+  .sensory-line {
+    font-size: 1.5rem;
+  }
+
+  .collaboration-description {
+    font-size: 1rem;
+  }
+
   .shop-button {
-    padding: 10px 20px;
+    padding: 12px 30px;
     font-size: 0.9rem;
   }
 }
