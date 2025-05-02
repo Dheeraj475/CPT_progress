@@ -4,7 +4,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 3rem;
 }
 
@@ -66,4 +66,17 @@
 
 .shop-btn:hover {
   background-color: #222;
+}
+
+@media screen and (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-text h3 {
+    font-size: 1.5rem;
+  }
+  .grid-text p {
+    font-size: 0.9rem;
+  }
+  
 }
