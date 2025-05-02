@@ -4,9 +4,12 @@ import {
   FaShoppingCart,
   FaBars,
   FaTimes,
-  FaSearch
+  FaSearch,
+  FaHeart
 } from 'react-icons/fa';
 import '../assets/Navbar.css';
+import logo from '../assets/images/wallvish-logo.png';
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,6 +40,7 @@ const Navbar = () => {
           <div className="icons">
             <FaUserCircle className="icon" />
             <FaShoppingCart className="icon" />
+            <FaHeart className="icon" />
             <div
               className="hamburger"
               onClick={() => setMenuOpen(open => !open)}
@@ -51,6 +55,13 @@ const Navbar = () => {
 
         {/* BOTTOM ROW: category links */}
         <nav className="navbar-bottom">
+          <div className="nav-left">
+            <img
+            src={logo}
+            alt="Logo"
+            className="nav-logo responsive-logo"
+          />
+          </div>
           {[
             'WALLPAPER',
             'PAINT',
@@ -60,10 +71,20 @@ const Navbar = () => {
             'HOME FURNISHINGS',
             'BLOGS & TUTORIALS'
           ].map(label => (
+            <>
             <div key={label} className="nav-item">
               {label}
             </div>
+            </>
           ))}
+
+        {scrolled && (
+            <div className="scroll-icons">
+              <FaUserCircle className="icon" />
+              <FaShoppingCart className="icon" />
+            </div>
+        )}
+
         </nav>
       </header>
 
@@ -72,11 +93,10 @@ const Navbar = () => {
         <div className="mobile-menu">
           {[
             'WALLPAPER',
-            'PAINT',
-            'WALL MURALS',
-            'CURTAINS',
+            'VINYL FLOORING',
+            'CRYSTAL FRAMES',
+            'CANVAS FRAMES',
             'BLINDS',
-            'HOME FURNISHINGS',
             'BLOGS & TUTORIALS'
           ].map(label => (
             <div key={label} className="mobile-item">

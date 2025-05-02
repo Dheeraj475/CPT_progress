@@ -15,8 +15,9 @@ body {
   width: 100%;
   z-index: 999;
   background-color: #252a2c;
-  /* slight drop shadow */
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  padding: 15px 30px;
+  justify-content: space-between;
 }
 
 /* ─── TOP ROW (LOGO / SEARCH / ICONS) ───────────────────────────────────────── */
@@ -24,32 +25,56 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 40px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  padding: 15px 50px;
 }
+
 .navbar.scrolled .navbar-top {
-  transform: translateY(-100%);
   opacity: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar.navbar.scrolled{
+  padding: 0;
+}
+
+
+.nav-logo {
+  display: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: auto;
 }
 
 /* Logo */
 .logo {
+  flex: 0 0 auto;
   color: #fff;
   font-size: 1.8rem;
   font-weight: bold;
+  transition: font-size 0.3s ease; /* Smooth resizing on scroll */
+}
+
+/* Shrink logo when scrolled */
+.navbar.scrolled .logo {
+  font-size: 1.4rem; /* Smaller logo on scroll */
+  transition: font-size 0.3s ease;
 }
 
 /* Search box */
 .search-container {
   flex: 1;
   max-width: 500px;
-  margin: 0 40px;
+  margin: 0 40px; 
   position: relative;
   transition: opacity 0.3s ease;
 }
+
 .search-input {
   width: 100%;
-  padding: 8px 50px 8px 15px;
+  padding: 12px 20px;
   border: 1px solid #fff;
   border-radius: 50px;
   background: transparent;
@@ -74,7 +99,10 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
+  z-index: 2; /* Ensure icons are above content */
 }
+
 .icon {
   color: #fff;
   font-size: 1.4rem;
@@ -93,11 +121,55 @@ body {
 /* ─── BOTTOM ROW (CATEGORIES) ───────────────────────────────────────────────── */
 .navbar-bottom {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 30px;
   background-color: #252a2c;
-  padding: 10px 0;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
 }
+
+.navbar.scrolled .navbar-bottom {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #252a2c;
+  z-index: 1000;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+.navbar.scrolled .navbar-bottom .nav-item {
+  font-size: 0.8rem;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 20px;
+  flex:auto;
+}
+
+
+.navbar.scrolled .nav-logo {
+  display: block;
+}
+
+.nav-logo.responsive-logo {
+  max-width: 100%;
+  height: auto;
+  width:50px; 
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
 .nav-item {
   color: #fff;
   font-size: 1rem;
@@ -133,7 +205,75 @@ body {
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .search-container { display: none; }
-  .hamburger { display: block; }
-  .navbar-bottom { display: none; }
+  .navbar-top {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
+    background-color: #111;
+  }
+
+  .logo {
+    grid-column: 3;
+    justify-self: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .search-container {
+    display: none;
+  }
+
+  .search-icon,
+  .hamburger,
+  .icon {
+    font-size: 1.4rem;
+    color: #fff;
+  }
+
+  .search-icon {
+    grid-column: 2;
+  }
+
+  .hamburger {
+    grid-column: 1;
+    cursor: pointer;
+  }
+
+  .icons {
+    grid-column: 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px; 
+  }
+
+  .scroll-icons {
+    display: flex;
+    gap: 16px;
+    margin-right: auto;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+
+  .navbar-bottom{
+    display: none;
+  }
+
+  .mobile-menu {
+    background-color: #222;
+    color: white;
+    padding: 10px 0;
+  }
+
+  .mobile-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid #444;
+    font-size: 1rem;
+  }
 }
