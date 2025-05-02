@@ -38,9 +38,9 @@ const Navbar = () => {
           </div>
 
           <div className="icons">
-            <FaUserCircle className="icon" />
+            <FaUserCircle className="icon user-icon" />
             <FaShoppingCart className="icon" />
-            <FaHeart className="icon" />
+            <FaHeart className="icon heart-icon" />
             <div
               className="hamburger"
               onClick={() => setMenuOpen(open => !open)}
