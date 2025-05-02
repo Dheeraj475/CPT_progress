@@ -26,8 +26,21 @@ const Navbar = () => {
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         {/* TOP ROW: logo / search / icons */}
         <div className="navbar-top">
-          <div className="logo">WallVish Decor</div>
+        <div className="hamburger" onClick={() => setMenuOpen(open => !open)}>
+              {menuOpen
+                ? <FaTimes className="icon" />
+                : <FaBars className="icon" />
+              }
+        </div>
 
+        <div className="mobile-search-icon">
+            <FaSearch className="icon" />
+        </div>
+
+
+
+          <div className="logo">WallVish Decor</div>
+          
           <div className="search-container">
             <input
               type="text"
@@ -41,15 +54,7 @@ const Navbar = () => {
             <FaUserCircle className="icon user-icon" />
             <FaShoppingCart className="icon" />
             <FaHeart className="icon heart-icon" />
-            <div
-              className="hamburger"
-              onClick={() => setMenuOpen(open => !open)}
-            >
-              {menuOpen
-                ? <FaTimes className="icon" />
-                : <FaBars className="icon" />
-              }
-            </div>
+            
           </div>
         </div>
 

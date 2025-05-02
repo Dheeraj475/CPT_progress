@@ -36,7 +36,6 @@ body {
   color: white;
   font-size: 1rem;
   font-weight: bold;
-  margin-right: auto;
 }
 
 /* Logo */
@@ -194,6 +193,7 @@ body {
   z-index: 998;
   overflow-y: auto;
 }
+
 .mobile-item {
   color: #fff;
   font-size: 1.2rem;
@@ -219,8 +219,20 @@ body {
     font-size: 1.4rem; /* Smaller logo on scroll */
     transition: font-size 0.3s ease;
   }
+
+  .logo {
+    margin-left: -11rem;
+    margin-right: -2rem;
+  }
+
 }
 
+
+
+/* Style search icon */
+.mobile-search-icon .icon {
+  display: none;
+}
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -259,8 +271,7 @@ body {
   .logo {
     font-size: 1.4rem;
     white-space: nowrap;
-    margin-left: 1rem;
-    margin-right: auto;
+    margin-left: -2.5rem;
   }
 
   .search-icon {
@@ -272,7 +283,6 @@ body {
     gap: 10px;
     align-items: center;
     justify-content: end;
-    margin-left: 3rem;
   }
 
   .search-container,
@@ -282,4 +292,23 @@ body {
   .user-icon {
     display: none;
   }
+
+  .hamburger-search {
+    display: flex;
+  }
+
+  /* Hide desktop-only search container and extra icons */
+  .search-container,
+  .search-icon:not(.mobile-search-icon .icon) {
+    display: none !important;
+  }
+
+  .mobile-search-icon .icon {
+    display: block;
+    font-size: 1.4rem;
+    color: #fff;
+    cursor: pointer;
+    margin-left: -2.4rem;
+  }
+
 }
