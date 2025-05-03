@@ -76,11 +76,9 @@ const Navbar = () => {
             'HOME FURNISHINGS',
             'BLOGS & TUTORIALS'
           ].map(label => (
-            <>
             <div key={label} className="nav-item">
               {label}
             </div>
-            </>
           ))}
 
         {scrolled && (
