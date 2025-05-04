@@ -198,7 +198,7 @@
 }
 
 /* Responsive: Hide on small screens */
-@media (max-width: 1025px) {
+@media (max-width: 1200px) {
   .mega-dropdown {
     display: none !important;
   }
