@@ -119,11 +119,11 @@ useEffect(() => {
 
           <div className="icons">
           <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
-          <FaUserCircle className="icon user-icon" />
+          <FaUserCircle className="icon user-icon"/>
           {showAccountDropdown && (
             <div className="account-dropdown">
               <div className="dropdown-arrow" />
-              <div className="dropdown-content">
+              <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
                 <div className="dropdown-item"><strong>SIGN IN</strong></div>
                 <div className="dropdown-item"><strong>REGISTER</strong></div>
               </div>
@@ -191,7 +191,7 @@ useEffect(() => {
           {showAccountDropdown && (
             <div className="account-dropdown">
               <div className="dropdown-arrow" />
-              <div className="dropdown-content">
+              <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
                 <div className="dropdown-item"><strong>SIGN IN</strong></div>
                 <div className="dropdown-item"><strong>REGISTER</strong></div>
               </div>
