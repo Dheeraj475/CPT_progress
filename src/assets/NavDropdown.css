@@ -98,8 +98,7 @@
   pointer-events: none;
 }
 
-
-
+/* Show dropdown on hover */
 .navbar-bottom .nav-item:hover .mega-dropdown {
   opacity: 1;
   visibility: visible;
@@ -107,21 +106,36 @@
   pointer-events: auto;
 }
 
+/* Disable navbar animation if scrolled */
 .navbar.scrolled .navbar-bottom .nav-item {
   font-size: none;
   animation: none;
 }
 
-.nav-item:hover {
-  opacity: 1;
-  background-color: white;  
-
-
+/* ✅ Normal nav links */
+.navbar-bottom .nav-item > a {
+  display: block;
+  padding: 16px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
+/* ✅ Highlight nav-item on hover */
+.navbar-bottom .nav-item:hover {
+  background-color: #fff;
+}
+
+/* ✅ Highlight nav link text inside on hover */
+.navbar-bottom .nav-item:hover > a {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Fix for dropdown inside scrolled navbar */
 .navbar.scrolled .navbar-bottom .nav-item:hover .mega-dropdown {
   position: absolute;
-  top: 100%; /* or your navbar height */
+  top: 100%;
   left: 0;
   right: 0;
   width: 100%;
@@ -131,7 +145,6 @@
   z-index: 1100;
   transform: translateY(0);
 }
-
 
 /* Mega Columns */
 .mega-column {
@@ -185,7 +198,7 @@
 }
 
 /* Responsive: Hide on small screens */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
   .mega-dropdown {
     display: none !important;
   }

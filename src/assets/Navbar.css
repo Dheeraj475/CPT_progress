@@ -16,7 +16,7 @@ body {
   z-index: 999;
   background-color: #252a2c;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  padding: 15px 30px;
+  padding: 0px 30px;
   justify-content: space-between;
 }
 
@@ -110,8 +110,7 @@ body {
   justify-content: space-evenly;/* spread items evenly across the full width */
   align-items: center;
   gap: 1rem;                 /* consistent gap between items */
-  background-color: #252a2c;
-  padding: 0.75rem 0rem;        /* adjust horizontal padding as needed */
+  background-color: #252a2c;     
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1px;
@@ -164,10 +163,27 @@ body {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+  padding: 1rem 0.5rem;
   transition: color 0.2s;
+  
 }
+
+.navbar.scrolled .nav-item {
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 1.3rem 0.5rem;
+  transition: color 0.2s;
+  
+}
+
+
 .nav-item:hover {
-  color: #f7c08a;
+  color: black;
+  border-top-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+  background-color: #fff;
+
 }
 
 .scroll-icons {
@@ -220,10 +236,7 @@ body {
     transition: font-size 0.3s ease;
   }
 
-  .logo {
-    margin-left: -11rem;
-    margin-right: -2rem;
-  }
+  
 
 }
 
@@ -235,12 +248,13 @@ body {
 }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 999;
+    padding: 1.3rem 0;
   }
 
   .navbar-top {
@@ -248,24 +262,25 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 10px 15px;
+    padding: 0px 15px;
     background-color: #252a2c;
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+    flex-wrap: wrap;
   }
 
   /* Prevent fade/slide on scroll */
   .navbar.scrolled .navbar-top {
     opacity: 1 !important;
-    padding: 10px 15px !important;
     margin: 0 !important;
     transform: none !important;
   }
 
   .hamburger {
-    display: block;
+    display: flex;
     font-size: 1.4rem;
+    gap: 3rem;
   }
 
   .logo {

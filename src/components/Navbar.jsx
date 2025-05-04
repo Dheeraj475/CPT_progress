@@ -97,11 +97,12 @@ useEffect(() => {
                 ? <FaTimes className="icon" />
                 : <FaBars className="icon" />
               }
-        </div>
-
-        <div className="mobile-search-icon">
+              <div className="mobile-search-icon">
             <FaSearch className="icon" />
         </div>
+        </div>
+
+        
 
 
 
@@ -201,8 +202,8 @@ useEffect(() => {
               <FaHeart className="icon" />
             </div>
         )}
-
         </nav>
+         <span className="white-line"></span>
       </header>
 
       {/* MOBILE SLIDE-IN MENU */}
