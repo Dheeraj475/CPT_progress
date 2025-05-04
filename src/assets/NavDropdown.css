@@ -1,0 +1,192 @@
+/* -----------------------------------USER DROPDOWN LOGIN----------------------------------------------- */
+.user-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  border-radius: 6px;
+  padding-top: 10px;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+
+.dropdown-content {
+  text-align: left;
+  padding: 10px 20px;
+}
+
+.dropdown-content strong {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.dropdown-item {
+  font-size: 14px;
+  color: #000;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  scale: 1.04;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive handling (optional adjustment) */
+@media (max-width: 600px) {
+  .account-dropdown {
+    right: -10px;
+    width: 140px;
+  }
+
+  .dropdown-arrow {
+    right: 10px;
+  }
+}
+/*================USERDROPDOWN ENDED====================*/
+
+/* /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/ */
+
+/*--------------------DROP DOWN TEXT------------------------*/
+
+/* Mega Dropdown */
+.mega-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: auto;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px 80px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+
+
+.navbar-bottom .nav-item:hover .mega-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.navbar.scrolled .navbar-bottom .nav-item {
+  font-size: none;
+  animation: none;
+}
+
+.nav-item:hover {
+  opacity: 1;
+  background-color: white;  
+
+
+}
+
+.navbar.scrolled .navbar-bottom .nav-item:hover .mega-dropdown {
+  position: absolute;
+  top: 100%; /* or your navbar height */
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1100;
+  transform: translateY(0);
+}
+
+
+/* Mega Columns */
+.mega-column {
+  flex: 1 1 180px;
+  max-width: 200px;
+  margin: 0 20px;
+}
+
+.mega-column h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: #444;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.mega-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mega-column li {
+  margin-bottom: 8px;
+}
+
+.mega-column li a {
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mega-column li a:hover {
+  color: #6d8c46; /* Match the button green tone */
+}
+
+/* CTA Button */
+.mega-dropdown .cta-button {
+  margin-top: 25px;
+  padding: 12px 28px;
+  background-color: #6d8c46;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 30px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Responsive: Hide on small screens */
+@media (max-width: 768px) {
+  .mega-dropdown {
+    display: none !important;
+  }
+}

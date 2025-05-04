@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   FaUserCircle,
   FaShoppingCart,
@@ -8,17 +8,83 @@ import {
   FaHeart
 } from 'react-icons/fa';
 import '../assets/Navbar.css';
+import '../assets/NavDropdown.css';
 import logo from '../assets/images/wallvish-logo.png';
 
-
+const navItems = [
+  {
+    label: 'WALLPAPER',
+    columns: [
+      { title: 'Colour', items: ['BLACK','BLUE','BROWN','CREAM','GOLD','GREEN','GREY','METALLIC','YELLOW','MUSTARD'] },
+      { title: 'Design', items: ['ANIMALS & BIRDS','BRICK & WOOD','DAMASK','FLOCK & LUXURY','FLORAL','GEOMETRIC','FEATURE WALL','PLAIN OR TEXTURED','QUIRKY','STRIPED'] },
+      { title: 'Room', items: ['BATHROOM','BEDROOM','CHILDRENS ROOM','DINING ROOM','HALLWAY','KITCHEN','LIVING ROOM'] },
+      { title: 'Designer', items: ['THE HAPPY NEWS','BARBARA HULANICKI','2 LOVELY GAYS','CLARISSA HULSE','HEMINGWAY DESIGN','SACHA WALKHOFF'] },
+      { title: 'Accessories', items: ['WALLPAPER TOOLS'] }
+    ]
+  },
+  {
+    label: 'VINYL FLOORING',
+    columns: [
+      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+    ]
+  },
+  {
+    label: 'CRYSTAL FRAMES',
+    columns: [
+      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+    ]
+  },
+  {
+    label: 'CANVAS FRAMES',
+    columns: [
+      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+    ]
+  },
+  {
+    label: 'BLINDS',
+    columns: [
+      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+    ]
+  },
+  {
+    label: 'BLOGS & TUTORIALS',
+    columns: [
+      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+    ]
+  },
+  /* …other top-level nav items… */
+];
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showAccountDropdown, setShowAccountDropdown] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const isMobile = window.innerWidth < 768;
+
+  const accountRef = useRef();
+
+const toggleAccountDropdown = () => {
+  setShowAccountDropdown(prev => !prev);
+};
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (accountRef.current && !accountRef.current.contains(event.target)) {
+      setShowAccountDropdown(false);
+    }
+  };
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, [accountRef]);
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+
   }, []);
 
   return (
@@ -45,13 +111,24 @@ const Navbar = () => {
             <input
               type="text"
               className="search-input"
-              placeholder="Search wallpapers, paints, decor..."
+              placeholder="Search wallpapers, vinyl flooring, crystal frames..."
             />
             <FaSearch className="search-icon" />
           </div>
 
           <div className="icons">
-            <FaUserCircle className="icon user-icon" />
+          <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
+          <FaUserCircle className="icon user-icon" />
+          {showAccountDropdown && (
+            <div className="account-dropdown">
+              <div className="dropdown-arrow" />
+              <div className="dropdown-content">
+                <div className="dropdown-item"><strong>SIGN IN</strong></div>
+                <div className="dropdown-item"><strong>REGISTER</strong></div>
+              </div>
+            </div>
+          )}
+          </div>
             <FaShoppingCart className="icon" />
             <FaHeart className="icon heart-icon" />
             
@@ -63,28 +140,65 @@ const Navbar = () => {
           <div className="nav-left">
             <img
             src={logo}
-            alt="Logo"
+            alt="Logo"  
             className="nav-logo responsive-logo"
+           
           />
           </div>
-          {[
-            'WALLPAPER',
-            'PAINT',
-            'WALL MURALS',
-            'CURTAINS',
-            'BLINDS',
-            'HOME FURNISHINGS',
-            'BLOGS & TUTORIALS'
-          ].map(label => (
-            <div key={label} className="nav-item">
-              {label}
+
+
+          {navItems.map(nav => (
+            <div
+              key={nav.label}
+              className="nav-item"
+              onMouseEnter={() => !isMobile && setActiveDropdown(nav.label)}
+              onMouseLeave={() => !isMobile && setActiveDropdown(null)}
+            >
+              
+              {nav.label}
+              {activeDropdown === nav.label && (
+                <div className="mega-dropdown">
+                  {nav.columns.map(col => (
+                    <div key={col.title} className="mega-column">
+                      <h4>{col.title}</h4>
+                      <ul>
+                        {col.items.map(item => (
+                          <li key={item}>
+                            <a href="#">{item}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  {/* only for the first nav (wallpaper) */}
+                  {/* {nav.label === 'WALLPAPER' && (
+                    <a href="/wallpaper" className="cta-button">
+                      View All Wallpaper
+                    </a>
+                  )} */}
+                </div>
+               
+              )}
             </div>
+            
           ))}
 
         {scrolled && (
             <div className="scroll-icons">
-              <FaUserCircle className="icon" />
+          <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
+          <FaUserCircle className="icon user-icon" />
+          {showAccountDropdown && (
+            <div className="account-dropdown">
+              <div className="dropdown-arrow" />
+              <div className="dropdown-content">
+                <div className="dropdown-item"><strong>SIGN IN</strong></div>
+                <div className="dropdown-item"><strong>REGISTER</strong></div>
+              </div>
+            </div>
+          )}
+          </div>
               <FaShoppingCart className="icon" />
+              <FaHeart className="icon" />
             </div>
         )}
 

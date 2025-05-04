@@ -30,7 +30,7 @@ const Section = () => {
             <span className="establish">Where Every Wall Tells a Story </span>
             <br />
             <br />
-            <span className="sensory">The <strong>Signature</strong> Touch of Elegance</span>
+            <span className="sensory">The Signature Touch of Elegance</span>
           </h2>
           <p className="collaboration-description">
           Inspired by the desire to make every corner unforgettable, 

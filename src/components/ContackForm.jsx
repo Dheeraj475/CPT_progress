@@ -1,7 +1,7 @@
 import React from 'react';
-import '../assets/SustainabilityReport.css';
+import '../assets/ContackForm.css';
 
-function SustainabilityReport() {
+function ContackForm() {
   return (
     <section className="sustainability-section">
       <div className="sustainability-image">
@@ -23,4 +23,4 @@ function SustainabilityReport() {
   );
 }
 
-export default SustainabilityReport;
+export default ContackForm;
