@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import '../assets/Reading.css';
+import Environment from '../assets/images/environment-friendly.jpg';
+import Support from '../assets/images/support.jpg';
+import Returns from '../assets/images/returns.jpg';
 
 function Reading() {
   const [readMore, setReadMore] = useState(false);
 
   const badges = [
     {
-      src: 'https://img.icons8.com/ios-filled/100/000000/return.png',
+      src: Environment,
       label: 'EASY RETURNS'
     },
     {
-      src: 'https://img.icons8.com/ios-filled/100/000000/leaf.png',
+      src:Support,
       label: 'RESPONSIBLE & SUSTAINABLE'
     },
     {
-      src: 'https://img.icons8.com/ios-filled/100/000000/speech-bubble.png',
+      src: Returns,
       label: 'FRIENDLY & HELPFUL SERVICE'
     },
     {

@@ -102,7 +102,7 @@
     margin-bottom: 3rem;
   }
   
-  .reading-logo {
+  /* .reading-logo {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -117,15 +117,15 @@
     background-color: #fff;
     transition: transform 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  }
+  } */
   
   .reading-logo:hover {
     transform: scale(1.05);
   }
   
   .reading-logo img {
-    width: 40px;
-    height: 40px;
+    width: 10rem;
+    height: 10rem;
     margin-bottom: 0.5rem;
   }
   
@@ -174,14 +174,10 @@
         align-items: center;
       }
     
-      .reading-logo {
-        width: 110px;
-        height: 110px;
-      }
     
       .reading-logo img {
-        width: 32px;
-        height: 32px;
+        width: 8rem;
+        height: 8rem;
       }
     
       .reading-logo p {
