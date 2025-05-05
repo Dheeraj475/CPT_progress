@@ -1,38 +1,67 @@
-import React from 'react';
-import '../assets/Footer.css'; // Create this CSS file
+import React, { useState, useEffect } from 'react';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import '../assets/Footer.css';
 
 const Footer = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+    if (window.innerWidth > 768) {
+      setActiveIndex(null); // Reset accordion in desktop
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleAccordion = (index) => {
+    if (!isMobile) return;
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const footerData = [
+    {
+      title: 'HOW CAN WE HELP?',
+      items: ['Delivery', 'Returns', 'Sample Service'],
+    },
+    {
+      title: 'CORPORATE',
+      items: ['Our Heritage', 'Public Relation Contacts', 'Our Sustainability Pledge', 'Privacy & Legal'],
+    },
+    {
+      title: 'USEFUL LINKS',
+      items: ['Loving Home Magazine', 'Wallpaper', 'Paint', 'Curtains', 'Blinds', 'Bed Linen'],
+    },
+  ];
+
   return (
     <footer className="site-footer">
       <div className="footer-links">
-        <div>
-          <h4>HOW CAN WE HELP?</h4>
-          <ul>
-            <li>Delivery</li>
-            <li>Returns</li>
-            <li>Sample Service</li>
-          </ul>
-        </div>
-        <div>
-          <h4>CORPORATE</h4>
-          <ul>
-            <li>Our Heritage</li>
-            <li>Public Relation Contacts</li>
-            <li>Our Sustainability Pledge</li>
-            <li>Privacy & Legal</li>
-          </ul>
-        </div>
-        <div>
-          <h4>USEFUL LINKS</h4>
-          <ul>
-            <li>Loving Home Magazine</li>
-            <li>Wallpaper</li>
-            <li>Paint</li>
-            <li>Curtains</li>
-            <li>Blinds</li>
-            <li>Bed Linen</li>
-          </ul>
-        </div>
+        {footerData.map((section, index) => (
+          <div key={index} className="footer-section">
+            <h4 className="footer-heading" onClick={() => toggleAccordion(index)}>
+              {section.title}
+              {isMobile && (
+                  <span className="accordion-arrow">
+                    {activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}
+                  </span>
+                )}
+
+            </h4>
+            {(isMobile ? activeIndex === index : true) && (
+              <ul className="footer-list">
+                {section.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+
         <div className="newsletter">
           <h4>Sign up to Our Newsletter</h4>
           <input type="email" placeholder="Enter the email here" />
@@ -40,10 +69,10 @@ const Footer = () => {
           <p>By signing up you are consenting to receive...</p>
         </div>
       </div>
+
       <div className="footer-bottom">
         <p>© GRAHAM AND BROWN LTD. 2025</p>
         <div className="social-icons">
-          {/* Replace these with your social media icon components or SVGs */}
           <span>F</span><span>X</span><span>IG</span><span>YT</span><span>P</span>
         </div>
       </div>
