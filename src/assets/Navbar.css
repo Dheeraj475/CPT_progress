@@ -25,10 +25,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  padding: 15px 50px;
+  position: relative;
+  padding: 15px 0;
+  flex-wrap: wrap;
 }
-
 
 
 .nav-logo {
@@ -40,22 +40,25 @@ body {
 
 /* Logo */
 .logo {
-  flex: 0 0 auto;
+  flex: 1;
+  text-align: left;
   color: #fff;
   font-size: 1.8rem;
   font-weight: bold;
-  transition: font-size 0.3s ease; /* Smooth resizing on scroll */
 }
+
 
 
 /* Search box */
 .search-container {
-  flex: 1;
+  position: absolute;
+  left: 53%;
+  transform: translateX(-50%);
+  width: 100%;
   max-width: 500px;
-  margin: 0 40px; 
-  position: relative;
-  transition: opacity 0.3s ease;
+  z-index: 1;
 }
+
 
 .search-input {
   width: 100%;
@@ -123,7 +126,15 @@ body {
   width: 100%;
   background-color: #252a2c;
   z-index: 1000;
-  animation: slideDown 0.3s ease-in-out;
+}
+
+/* Smooth transition for navbar height, padding, and font-size */
+.navbar-bottom,
+.logo,
+.search-container
+
+ {
+  transition: all 0.3s ease;
 }
 
 .navbar.scrolled .navbar-bottom .nav-item {
@@ -147,11 +158,6 @@ body {
   max-width: 100%;
   height: auto;
   width:50px; 
-}
-
-@keyframes slideDown {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
 }
 
 .nav-item {
@@ -281,6 +287,7 @@ body {
   }
 
   .logo {
+    flex: unset;
     font-size: 1.4rem;
     white-space: nowrap;
   }
