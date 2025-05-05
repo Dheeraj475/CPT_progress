@@ -5,11 +5,15 @@ import {
   FaBars,
   FaTimes,
   FaSearch,
-  FaHeart
+  FaHeart,
+  FaPlus,
+  FaMinus,
 } from 'react-icons/fa';
 import '../assets/Navbar.css';
 import '../assets/NavDropdown.css';
+import '../assets/NavAccordion.css';
 import logo from '../assets/images/wallvish-logo.png';
+
 
 const navItems = [
   {
@@ -72,6 +76,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showAccountDropdown, setShowAccountDropdown] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileAccordions, setMobileAccordions] = useState({});
   const isMobile = window.innerWidth < 768;
 
   const accountRef = useRef();
@@ -79,6 +84,14 @@ const Navbar = () => {
 const toggleAccountDropdown = () => {
   setShowAccountDropdown(prev => !prev);
 };
+
+const toggleAccordion = (label) => {
+  setMobileAccordions((prev) => ({
+    ...prev,
+    [label]: !prev[label],
+  }));
+};
+
 
 useEffect(() => {
   const handleClickOutside = (event) => {
@@ -221,21 +234,56 @@ useEffect(() => {
 
       {/* MOBILE SLIDE-IN MENU */}
       {menuOpen && (
-        <div className="mobile-menu">
-          {[
-            'WALLPAPER',
-            'VINYL FLOORING',
-            'CRYSTAL FRAMES',
-            'CANVAS FRAMES',
-            'BLINDS',
-            'BLOGS & TUTORIALS'
-          ].map(label => (
-            <div key={label} className="mobile-item">
-              {label}
+  <div className="mobile-menu">
+    {navItems.map(({ label, columns }) => {
+      const isSectionOpen = mobileAccordions[label];
+
+      return (
+        <div key={label} className="accordion-section">
+          <div className="accordion-header" onClick={() => toggleAccordion(label)}>
+            <span className="accordion-label">{label}</span>
+            <span className="accordion-icon">
+              {isSectionOpen ? <FaMinus /> : <FaPlus />}
+            </span>
+          </div>
+
+          {isSectionOpen && (
+            <div className="accordion-subsection">
+              {columns.map(({ title, items }) => {
+                const titleKey = `${label}-${title}`;
+                const isTitleOpen = mobileAccordions[titleKey];
+
+                return (
+                  <div key={title} className="nested-accordion">
+                    <div className="accordion-header" onClick={() => toggleAccordion(titleKey)}>
+                      <span className="accordion-title">{title}</span>
+                      <span className="accordion-icon">
+                        {isTitleOpen ? <FaMinus /> : <FaPlus />}
+                      </span>
+                    </div>
+
+                    {isTitleOpen && (
+                      <ul className="accordion-list">
+                        {items.map((item) => (
+                          <li key={item}>
+                            <a href="#" className="accordion-link">{item}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          ))}
+          )}
         </div>
-      )}
+      );
+    })}
+  </div>
+)}
+
+
+
     </>
   );
 };
