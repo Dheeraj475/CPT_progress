@@ -251,7 +251,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 999;
-    padding: 1.3rem 0;
+    padding: 1.3rem 1rem;
   }
 
   .navbar-top {
@@ -283,7 +283,6 @@ body {
   .logo {
     font-size: 1.4rem;
     white-space: nowrap;
-    margin-left: -2.5rem;
   }
 
   .search-icon {
@@ -305,22 +304,34 @@ body {
     display: none;
   }
 
-  .hamburger-search {
-    display: flex;
-  }
-
   /* Hide desktop-only search container and extra icons */
   .search-container,
   .search-icon:not(.mobile-search-icon .icon) {
     display: none !important;
   }
 
+  .mobile-search-icon {
+    position: absolute;
+    left: 4rem;
+  }
+
   .mobile-search-icon .icon {
-    display: block;
+    display: flex;
     font-size: 1.4rem;
-    color: #fff;
-    cursor: pointer;
-    margin-left: -2.4rem;
   }
 
 }
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .navbar-bottom {
+    display: none; /* Hide the bottom navbar on tablets and small desktops */
+  }
+
+  .navbar.scrolled .navbar-top {
+    opacity: 1 !important;
+    margin: 0 !important;
+    transform: none !important;
+    padding: 1.3rem 1rem;
+  }
+}
+

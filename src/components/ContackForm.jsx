@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import '../assets/ContackForm.css';
+import FormImage from '../assets/images/form-image.jpg';
 
 
 function ContackForm() {
@@ -44,7 +45,7 @@ function ContackForm() {
     <section className="sustainability-section">
       <div className="sustainability-image">
         <img
-          src="https://picsum.photos/id/1018/800/600"
+          src={FormImage}
           alt="Wall art scenery"
         />
       </div>

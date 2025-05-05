@@ -97,9 +97,9 @@ useEffect(() => {
                 ? <FaTimes className="icon" />
                 : <FaBars className="icon" />
               }
-              <div className="mobile-search-icon">
-            <FaSearch className="icon" />
         </div>
+        <div className="mobile-search-icon">
+          <FaSearch className="icon" />
         </div>
 
         

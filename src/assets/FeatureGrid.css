@@ -6,25 +6,39 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 3rem;
+  align-items: stretch; 
 }
 
 .grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #fff;
   border-radius: 1rem;
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
 }
+
 
 .grid-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
+
 .grid-img {
-  width: 100%;
-  height: auto;
+  width: 100%; /* Crop instead of stretching */
   display: block;
+  object-fit: cover; /* Maintain aspect ratio */
+  transition: transform 0.4s ease;
+  filter: brightness(95%);
+}
+
+.grid-item:hover .grid-img {
+  transform: scale(1.05); /* Subtle zoom on hover */
+  filter: brightness(100%);
 }
 
 .grid-text {
@@ -54,19 +68,24 @@
 }
 
 .shop-btn {
-  background-color: black;
-  color: white;
+  background-color: #000;
+  color: #fff;
   padding: 0.75rem 1.8rem;
   border: none;
   border-radius: 0.75rem;
   font-size: 1rem;
-  font-weight: 500;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto;
 }
 
 .shop-btn:hover {
-  background-color: #222;
+  background-color: #ff5a5f; /* Adds vibrant call-to-action */
+  transform: scale(1.05);
 }
+
 
 @media screen and (min-width: 768px) {
   .grid {

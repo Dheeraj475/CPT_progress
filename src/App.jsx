@@ -2,7 +2,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Section from './components/Section';
-import FeatureGrid from './components/FeatureGrip';
+import FeatureGrid from './components/FeatureGrid';
 import SustainabilityReport from './components/ContackForm';
 import Reading from './components/Reading';
 import GoogleReviews from './components/GoogleReviews';
