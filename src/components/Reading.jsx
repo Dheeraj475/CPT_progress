@@ -3,6 +3,7 @@ import '../assets/Reading.css';
 import Environment from '../assets/images/environment-friendly.jpg';
 import Support from '../assets/images/support.jpg';
 import Returns from '../assets/images/returns.jpg';
+import RequestSample from '../assets/images/request-sample.jpg';
 
 function Reading() {
   const [readMore, setReadMore] = useState(false);
@@ -10,19 +11,19 @@ function Reading() {
   const badges = [
     {
       src: Environment,
-      label: 'EASY RETURNS'
-    },
-    {
-      src:Support,
       label: 'RESPONSIBLE & SUSTAINABLE'
     },
     {
-      src: Returns,
+      src:Support,
       label: 'FRIENDLY & HELPFUL SERVICE'
     },
     {
-      src: 'https://img.icons8.com/ios-filled/100/000000/sample.png',
-      label: 'SAMPLES AVAILABLE'
+      src: Returns,
+      label: 'EASY RETURNS'
+    },
+    {
+      src: RequestSample,
+      label: 'REQUEST AVAILABLE'
     }
   ];
 
@@ -34,7 +35,6 @@ function Reading() {
         {badges.map((badge, i) => (
           <div key={i} className="reading-logo">
             <img src={badge.src} alt={badge.label} />
-            <p>{badge.label}</p>
           </div>
         ))}
       </div>
