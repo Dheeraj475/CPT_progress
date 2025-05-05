@@ -19,7 +19,7 @@
   
   .sustainability-content {
     flex: 1;
-    background-color: #556038;
+    background-color: white;
     color: white;
     display: flex;
     flex-direction: column;
@@ -78,7 +78,6 @@
     padding: 1.5rem;
     background-color: white;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
   

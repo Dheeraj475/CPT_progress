@@ -25,31 +25,44 @@ const navItems = [
   {
     label: 'VINYL FLOORING',
     columns: [
-      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+      { title: 'Colour', items: ['BLACK','BLUE','BROWN','CREAM','GOLD','GREEN','GREY','METALLIC','YELLOW','MUSTARD'] },
+      { title: 'Design', items: ['ANIMALS & BIRDS','BRICK & WOOD','DAMASK','FLOCK & LUXURY','FLORAL','GEOMETRIC','FEATURE WALL','PLAIN OR TEXTURED','QUIRKY','STRIPED'] },
+      { title: 'Room', items: ['BATHROOM','BEDROOM','CHILDRENS ROOM','DINING ROOM','HALLWAY','KITCHEN','LIVING ROOM'] },
     ]
   },
   {
     label: 'CRYSTAL FRAMES',
     columns: [
-      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+      { title: 'Colour', items: ['BLACK','BLUE','BROWN','CREAM','GOLD','GREEN','GREY','METALLIC','YELLOW','MUSTARD'] },
+      { title: 'Design', items: ['ANIMALS & BIRDS','BRICK & WOOD','DAMASK','FLOCK & LUXURY','FLORAL','GEOMETRIC','FEATURE WALL','PLAIN OR TEXTURED','QUIRKY','STRIPED'] },
     ]
   },
   {
     label: 'CANVAS FRAMES',
     columns: [
-      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+      { title: 'Colour', items: ['BLACK','BLUE','BROWN','CREAM','GOLD','GREEN','GREY','METALLIC','YELLOW','MUSTARD'] },
+      { title: 'Design', items: ['ANIMALS & BIRDS','BRICK & WOOD','DAMASK','FLOCK & LUXURY','FLORAL','GEOMETRIC','FEATURE WALL','PLAIN OR TEXTURED','QUIRKY','STRIPED'] },
+      { title: 'Room', items: ['BATHROOM','BEDROOM','CHILDRENS ROOM','DINING ROOM','HALLWAY','KITCHEN','LIVING ROOM'] },
+      { title: 'Designer', items: ['THE HAPPY NEWS','BARBARA HULANICKI','2 LOVELY GAYS','CLARISSA HULSE','HEMINGWAY DESIGN','SACHA WALKHOFF'] },
     ]
   },
   {
     label: 'BLINDS',
     columns: [
-      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+      { title: 'Colour', items: ['BLACK','BLUE','BROWN','CREAM','GOLD','GREEN','GREY','METALLIC','YELLOW','MUSTARD'] },
+      { title: 'Design', items: ['ANIMALS & BIRDS','BRICK & WOOD','DAMASK','FLOCK & LUXURY','FLORAL','GEOMETRIC','FEATURE WALL','PLAIN OR TEXTURED','QUIRKY','STRIPED'] },
+      { title: 'Room', items: ['BATHROOM','BEDROOM','CHILDRENS ROOM','DINING ROOM','HALLWAY','KITCHEN','LIVING ROOM'] },
+      { title: 'Accessories', items: ['WALLPAPER TOOLS'] }
     ]
   },
   {
     label: 'BLOGS & TUTORIALS',
     columns: [
-      { title: 'Type', items: ['WOOD LOOK','STONE LOOK','MODERN TILES'] }
+      { title: 'Colour', items: ['BLACK','BLUE','BROWN','CREAM','GOLD','GREEN','GREY','METALLIC','YELLOW','MUSTARD'] },
+      { title: 'Design', items: ['ANIMALS & BIRDS','BRICK & WOOD','DAMASK','FLOCK & LUXURY','FLORAL','GEOMETRIC','FEATURE WALL','PLAIN OR TEXTURED','QUIRKY','STRIPED'] },
+      { title: 'Room', items: ['BATHROOM','BEDROOM','CHILDRENS ROOM','DINING ROOM','HALLWAY','KITCHEN','LIVING ROOM'] },
+      { title: 'Designer', items: ['THE HAPPY NEWS','BARBARA HULANICKI','2 LOVELY GAYS','CLARISSA HULSE','HEMINGWAY DESIGN','SACHA WALKHOFF'] },
+      { title: 'Accessories', items: ['WALLPAPER TOOLS'] }
     ]
   },
   /* …other top-level nav items… */
