@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import '../assets/Footer.css';
-import { FaFacebookF, FaXTwitter, FaInstagram, FaYoutube, FaPinterestP, FaCcVisa, FaCcPaypal, FaCcMastercard, FaCcAmex } from 'react-icons/fa6';
+import { FaFacebookF, FaXTwitter, FaInstagram, FaYoutube, FaPinterestP, FaCcVisa, FaCcPaypal, 
+  FaCcMastercard, FaCcAmex } from 'react-icons/fa6';
 
 const Footer = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -27,7 +29,20 @@ const Footer = () => {
   const footerData = [
     {
       title: 'HOW CAN WE HELP?',
-      items: ['Delivery', 'Returns', 'Sample Service'],
+      items: [
+        { 
+          label: 'Delivery', 
+          path: '/delivery' 
+        },
+        { 
+          label: 'Returns', 
+          path: '/returns' 
+        },
+        { 
+          label: 'Sample Service', 
+          path: '/service' 
+        },
+      ],
     },
     {
       title: 'CORPORATE',
@@ -38,6 +53,7 @@ const Footer = () => {
       items: ['Loving Home Magazine', 'Wallpaper', 'Paint', 'Curtains', 'Blinds', 'Bed Linen'],
     },
   ];
+  
 
   return (
     <footer className="site-footer">
@@ -55,10 +71,17 @@ const Footer = () => {
             </h4>
             {(isMobile ? activeIndex === index : true) && (
               <ul className="footer-list">
-                {section.items.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
+              {section.items.map((item, idx) => (
+                <li key={idx}>
+                  {typeof item === 'string' ? (
+                    item
+                  ) : (
+                    <Link to={item.path}>{item.label}</Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+            
             )}
           </div>
         ))}

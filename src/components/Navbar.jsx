@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaUserCircle,
   FaShoppingCart,
@@ -132,7 +133,7 @@ useEffect(() => {
 
 
 
-          <div className="logo">WallVish Decor</div>
+        <div className="logo"><Link to="/">WallVish Decor</Link></div>
           
           <div className="search-container">
             <input
@@ -150,8 +151,8 @@ useEffect(() => {
             <div className="account-dropdown">
               <div className="dropdown-arrow" />
               <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
-                <div className="dropdown-item"><strong>SIGN IN</strong></div>
-                <div className="dropdown-item"><strong>REGISTER</strong></div>
+                <div className="dropdown-item"><Link to="/login"><strong>SIGN IN</strong></Link></div>
+                <div className="dropdown-item"><Link to="/register"><strong>REGISTER</strong></Link></div>
               </div>
             </div>
           )}
@@ -165,12 +166,13 @@ useEffect(() => {
         {/* BOTTOM ROW: category links */}
         <nav className="navbar-bottom">
           <div className="nav-left">
+          <Link to="/">
             <img
             src={logo}
             alt="Logo"  
             className="nav-logo responsive-logo"
-           
-          />
+            />
+          </Link> 
           </div>
 
 
@@ -218,8 +220,8 @@ useEffect(() => {
             <div className="account-dropdown">
               <div className="dropdown-arrow" />
               <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
-                <div className="dropdown-item"><strong>SIGN IN</strong></div>
-                <div className="dropdown-item"><strong>REGISTER</strong></div>
+                <div className="dropdown-item"><Link to="/login"><strong>SIGN IN</strong></Link></div>
+                <div className="dropdown-item"><Link to="/login"><strong>REGISTER</strong></Link></div>
               </div>
             </div>
           )}

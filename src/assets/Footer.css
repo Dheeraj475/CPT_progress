@@ -30,12 +30,14 @@
     list-style: none;
     padding: auto;
     margin:auto;
+    
   }
   
   .footer-links ul li {
     margin-bottom: 0.6rem;
     cursor: pointer;
     transition: color 0.3s;
+
   }
   
   .footer-links ul li:hover {
