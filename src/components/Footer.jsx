@@ -5,11 +5,11 @@ import { FaFacebookF, FaXTwitter, FaInstagram, FaYoutube, FaPinterestP, FaCcVisa
 
 const Footer = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1200);
 
   const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768);
-    if (window.innerWidth > 768) {
+    setIsMobile(window.innerWidth <= 1200);
+    if (window.innerWidth > 1200) {
       setActiveIndex(null); // Reset accordion in desktop
     }
   };
@@ -48,7 +48,7 @@ const Footer = () => {
               {section.title}
               {isMobile && (
                   <span className="accordion-arrow">
-                    {activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}
+                    {activeIndex === index ? <FiChevronUp size={25} /> : <FiChevronDown size={25} />}
                   </span>
                 )}
 
@@ -65,8 +65,10 @@ const Footer = () => {
 
         <div className="newsletter">
           <h4>Sign up to Our Newsletter</h4>
+          <div className="newsletter-input">
+            <input type="email" placeholder="Enter the email here" />
+          </div>
           <p>By signing up you are consenting to receive the newsletter and other promotional materials from Graham & Brown.</p>
-          <input type="email" placeholder="Enter the email here" />
           <button>SUBSCRIBE</button>
         </div>
       </div>

@@ -19,11 +19,7 @@
     gap: 2rem;
     flex: 2;
   }
-  
-  .footer-section {
-    min-width: 160px;
-  }
-  
+
   .footer-links h4 {
     font-weight: 600;
     margin-bottom: 1rem;
@@ -32,8 +28,8 @@
   
   .footer-links ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: auto;
+    margin:auto;
   }
   
   .footer-links ul li {
@@ -66,7 +62,6 @@
   
   .newsletter input[type="email"] {
     width: 100%;
-    max-width: 300px;
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
@@ -93,7 +88,7 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 0rem 3rem;
+    padding: 1rem 3rem;
     gap: 1rem;
     text-align: center;
     margin-top: 2rem;
@@ -103,7 +98,7 @@
     flex: 1;
     display: flex;
     align-items: center;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
   
   .footer-bottom .social-icons {
@@ -167,9 +162,14 @@
     cursor: pointer;
   }
 
+  .accordion-arrow {
+    position: absolute;
+    right: 2rem;
+  }
+
   
   /* Hide arrows on desktop */
-  @media (min-width: 769px) {
+  @media (min-width: 1201px) {
     .accordion-arrow {
       display: none;
     }
@@ -177,7 +177,7 @@
   
   
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
 
     .footer-bottom {
       flex-direction: column;
@@ -192,17 +192,42 @@
 
     .footer-links {
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       text-align: left;
+    }
+
+    .newsletter h4{
+      text-align: center;
     }
   
     .footer-links > div {
       width: 100%;
-      max-width: 300px;
+    }
+
+    .newsletter {
+      max-width: 100%;
+      margin: 2rem auto;
     }
   
     .newsletter input[type="email"] {
       width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
+
+    .newsletter button {
+      padding: 10px 30px;
+      width: 100%;
+      background-color: #556b2f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
   }
   

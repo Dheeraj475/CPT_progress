@@ -224,13 +224,13 @@ body {
 @media (min-width: 769px) {
   .navbar.scrolled .navbar-top {
     opacity: 0;
-    padding: 0;
     margin: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
   
   .navbar.navbar.scrolled{
-    padding: 0;
+    padding: 0 1rem;
+    margin: 0;
   }
 
     /* Shrink logo when scrolled */
@@ -319,7 +319,7 @@ body {
 
   .mobile-search-icon {
     position: absolute;
-    left: 4rem;
+    left: 3rem;
   }
 
   .mobile-search-icon .icon {
