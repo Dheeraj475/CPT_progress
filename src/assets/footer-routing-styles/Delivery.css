@@ -1,8 +1,120 @@
-.delivery-container {
+/* Wrapper */
+.delivery-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d2d2d;
+}
+
+/* Headings */
+.delivery-heading {
+  text-align: center;
+  font-size: 2.2rem;
+  margin: 40px 0 25px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #ccc;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+/* Cards */
+.delivery-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delivery-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional Info */
+.additional-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.info-block {
+  flex: 1 1 calc(50% - 16px); /* Two columns with gap */
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background-color: white;
+  margin-bottom: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  height: fit-content; /* Ensure dynamic height */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin-top: 3rem;
-  height: 100%;
+  justify-content: space-between;
+}
+
+
+.info-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.info-block h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #0f2c59;
+  margin-bottom: 12px;
+}
+
+.info-block p {
+  margin: 10px 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.additional-info::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+strong {
+  font-weight: bold;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .info-block {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .additional-info {
+    grid-template-columns: 1fr;
+  }
+
+  .info-block {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .delivery-heading {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
 }
