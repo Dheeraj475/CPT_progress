@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import '../../assets/footer-routing-styles/Delivery.css';
 
 const deliveryInfo = [
@@ -57,6 +57,14 @@ const deliveryInfo = [
 
 
 const Delivery = () => {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   return (
     <section className="delivery-wrapper">
       <h2 className="delivery-heading">DELIVERY OPTIONS</h2>
