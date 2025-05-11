@@ -72,7 +72,7 @@ const navItems = [
   },
   /* …other top-level nav items… */
 ];
-const Navbar = () => {
+const Navbar = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showAccountDropdown, setShowAccountDropdown] = useState(false);
@@ -166,7 +166,7 @@ useEffect(() => {
         {/* BOTTOM ROW: category links */}
         <nav className="navbar-bottom">
           <div className="nav-left">
-          <Link to="/">
+          <Link onClick={props.handleClick} to="/">
             <img
             src={logo}
             alt="Logo"  

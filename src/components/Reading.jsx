@@ -3,7 +3,7 @@ import '../assets/Reading.css';
 import Environment from '../assets/images/environment-friendly.jpg';
 import Support from '../assets/images/support.jpg';
 import Returns from '../assets/images/returns.jpg';
-import RequestSample from '../assets/images/request-sample.jpg';
+import YouBuy from '../assets/images/you-buy.jpg';
 
 function Reading() {
   const [readMore, setReadMore] = useState(false);
@@ -22,8 +22,8 @@ function Reading() {
       label: 'EASY RETURNS'
     },
     {
-      src: RequestSample,
-      label: 'REQUEST AVAILABLE'
+      src: YouBuy,
+      label: 'Try Before You Buy'
     }
   ];
 

@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import React,{ useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -18,17 +18,27 @@ import Service from './components/footer-routing/Service';
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
 
+import ScrollToTop from './components/utils/ScrollToTop';
+
 
 function App() {
+  
+// Scroll to top on page load on clicking link
+const handleClick = () => {
+  window.scrollTo(0, 0);
+};
+
 
   return (
     
     <div className="App">
     <BrowserRouter>
-      <Navbar />
+    <ScrollToTop />
+      <Navbar handleClick={handleClick} />
 
       <div className="main-content">
         <Routes>
+          
           
           {/* Main Routing */}
           <Route path="/" element={
@@ -53,7 +63,7 @@ function App() {
         </Routes>
       </div>
 
-      <Footer />
+      <Footer handleClick={handleClick} />
     </BrowserRouter>
   </div>
   )

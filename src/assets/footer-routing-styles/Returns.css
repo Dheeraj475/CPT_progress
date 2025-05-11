@@ -1,0 +1,96 @@
+.returns-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #111;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.returns-title {
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.returns-text {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #222;
+  text-align: center;
+}
+
+.returns-text.center {
+  margin-bottom: 30px;
+}
+
+.returns-link {
+  color: #000;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.returns-link:hover {
+  color: #444;
+}
+
+.returns-box {
+  background-color: #e2e7e9;
+  border-radius: 16px;
+  padding: 35px 20px;
+  margin-top: 50px;
+}
+
+.returns-box-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.highlight {
+  background-color: #2f61a6;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.returns-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.returns-list li {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 6px 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .returns-title {
+    font-size: 2rem;
+  }
+
+  .returns-text,
+  .returns-box-text {
+    font-size: 1rem;
+  }
+
+  .returns-box {
+    padding: 25px 15px;
+  }
+
+ 
+}
+
+@media (max-width: 1200px) {
+   /* ✅ Add this to push Returns section down on small screens */
+   .returns-container {
+    margin-top: 80px;
+  }
+}

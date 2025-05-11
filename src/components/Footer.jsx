@@ -5,7 +5,7 @@ import '../assets/Footer.css';
 import { FaFacebookF, FaXTwitter, FaInstagram, FaYoutube, FaPinterestP, FaCcVisa, FaCcPaypal, 
   FaCcMastercard, FaCcAmex } from 'react-icons/fa6';
 
-const Footer = () => {
+const Footer = (props) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1200);
 
@@ -76,7 +76,7 @@ const Footer = () => {
                   {typeof item === 'string' ? (
                     item
                   ) : (
-                    <Link to={item.path}>{item.label}</Link>
+                    <Link onClick={props.handleClick} to={item.path}>{item.label}</Link>
                   )}
                 </li>
               ))}
@@ -104,7 +104,7 @@ const Footer = () => {
           <FaYoutube />
           <FaPinterestP />
         </div>
-        <div class="footer-copy">
+        <div className="footer-copy">
           <p>© WallVish Decor 2025</p>
         </div>
         <div className="payment-icons">

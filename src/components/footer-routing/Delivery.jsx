@@ -58,13 +58,6 @@ const deliveryInfo = [
 
 const Delivery = () => {
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }, []);
-
   return (
     <section className="delivery-wrapper">
       <h2 className="delivery-heading">DELIVERY OPTIONS</h2>
@@ -90,7 +83,11 @@ const Delivery = () => {
           <div className="info-block" key={idx}>
             <h3>{item.title}</h3>
             {item.content.map((para, pIdx) => (
-              <p key={pIdx}>{para}</p>
+              typeof para === 'string' ? (
+                <p key={pIdx}>{para}</p>
+              ) : (
+                <React.Fragment key={pIdx}>{para}</React.Fragment>
+              )
             ))}
           </div>
         ))}

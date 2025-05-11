@@ -50,7 +50,7 @@ function ContackForm() {
         />
       </div>
       <div className="sustainability-content">
-      <div class="contact-form">
+      <div className="contact-form">
       <div className="form-container">
       <h2 className="form-title">Contact Us</h2>
 
