@@ -1,72 +1,71 @@
-import React,{ useEffect } from 'react'
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 // Importing components
 import Navbar from './components/Navbar';
-import Section from './components/Section';
 import FeatureGrid from './components/FeatureGrid';
 import SustainabilityReport from './components/ContackForm';
 import Reading from './components/Reading';
 import GoogleReviews from './components/GoogleReviews';
 import Footer from './components/Footer';
+import ScrollToTop from './components/utils/ScrollToTop';
+import PageNotFound from './components/PageNotFound';
 
 // Importing routing components
 import Delivery from './components/footer-routing/Delivery';
 import Returns from './components/footer-routing/Returns';
 import Service from './components/footer-routing/Service';
-import Login from './components/authentication/Login';
-import Register from './components/authentication/Register';
-
-import ScrollToTop from './components/utils/ScrollToTop';
-
+import Auth from './components/authentication/Auth';
+import Section from './components/Section'; // ✅ Make sure this exists
 
 function App() {
-  
-// Scroll to top on page load on clicking link
-const handleClick = () => {
-  window.scrollTo(0, 0);
-};
-
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
-    
     <div className="App">
-    <BrowserRouter>
-    <ScrollToTop />
-      <Navbar handleClick={handleClick} />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Navbar handleClick={handleClick} />
 
-      <div className="main-content">
-        <Routes>
-          
-          
-          {/* Main Routing */}
-          <Route path="/" element={
-            <>
-              <Section />
-              <FeatureGrid />
-              <Reading />
-              <GoogleReviews />
-              <SustainabilityReport />
-            </>
-          } />
+        <div className="main-content">
+          <Routes>
+            {/* Main Route */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Section />
+                  <FeatureGrid />
+                  <Reading />
+                  <GoogleReviews />
+                  <SustainabilityReport />
+                </>
+              }
+            />
 
-          {/* Authentication Routing */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          
-          {/* Footer Routing */}
-          <Route path="/service" element={<Service />} />
-          <Route path="/delivery" element={<Delivery />} />
-          <Route path="/returns" element={<Returns />} />
+            {/* Authentication Nested Routing */}
+            <Route path="/auth">
+              <Route path="login" element={<Auth handleClick={handleClick} mode="login" />} />
+              <Route path="register" element={<Auth handleClick={handleClick} mode="register" />} />
+            </Route>
 
-        </Routes>
-      </div>
+            {/* Footer Routing */}
+            <Route path="/service" element={<Service />} />
+            <Route path="/delivery" element={<Delivery />} />
+            <Route path="/returns" element={<Returns />} />
 
-      <Footer handleClick={handleClick} />
-    </BrowserRouter>
-  </div>
-  )
+            {/* 404 Page */}
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </div>
+
+        <Footer handleClick={handleClick} />
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;

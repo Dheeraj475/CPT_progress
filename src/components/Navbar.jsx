@@ -151,8 +151,8 @@ useEffect(() => {
             <div className="account-dropdown">
               <div className="dropdown-arrow" />
               <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
-                <div className="dropdown-item"><Link to="/login"><strong>SIGN IN</strong></Link></div>
-                <div className="dropdown-item"><Link to="/register"><strong>REGISTER</strong></Link></div>
+                <div className="dropdown-item"><Link to="/auth/login"><strong>SIGN IN</strong></Link></div>
+                <div className="dropdown-item"><Link to="/auth/register"><strong>REGISTER</strong></Link></div>
               </div>
             </div>
           )}
@@ -220,8 +220,8 @@ useEffect(() => {
             <div className="account-dropdown">
               <div className="dropdown-arrow" />
               <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
-                <div className="dropdown-item"><Link to="/login"><strong>SIGN IN</strong></Link></div>
-                <div className="dropdown-item"><Link to="/login"><strong>REGISTER</strong></Link></div>
+                <div className="dropdown-item"><Link to="/auth/login"><strong>SIGN IN</strong></Link></div>
+                <div className="dropdown-item"><Link to="/auth/register"><strong>REGISTER</strong></Link></div>
               </div>
             </div>
           )}

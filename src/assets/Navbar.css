@@ -18,6 +18,7 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   padding: 0px 30px;
   justify-content: space-between;
+  transition: background-color 0.3s ease;
 }
 
 /* ─── TOP ROW (LOGO / SEARCH / ICONS) ───────────────────────────────────────── */
@@ -118,28 +119,35 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   font-size: 0.9rem;
+  transition: transform 0.3s ease;
 }
 
 .navbar.scrolled .navbar-bottom {
-  position: fixed;
+  position:fixed;
   top: 0;
   width: 100%;
   background-color: #252a2c;
   z-index: 1000;
+   transform: scale(0.95);
 }
 
 /* Smooth transition for navbar height, padding, and font-size */
-.navbar-bottom,
+/* Animate shrinking logo and search bar */
 .logo,
-.search-container
-
- {
-  transition: all 0.3s ease;
+.search-container {
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+/* On scroll, slightly shrink */
+.navbar.scrolled .logo,
+.navbar.scrolled .search-container {
+  transform: scale(0.95); /* shrink effect */
+  opacity: 0.9;
+}
+
 
 .navbar.scrolled .navbar-bottom .nav-item {
   font-size: 0.8rem;
-  animation: fadeIn 0.3s ease-in-out forwards;
 }
 
 
@@ -176,7 +184,6 @@ body {
   font-weight: 500;
   cursor: pointer;
   padding: 1.3rem 0.5rem;
-  transition: color 0.2s;
   
 }
 
@@ -225,7 +232,6 @@ body {
   .navbar.scrolled .navbar-top {
     opacity: 0;
     margin: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
   }
   
   .navbar.navbar.scrolled{
@@ -236,7 +242,6 @@ body {
     /* Shrink logo when scrolled */
   .navbar.scrolled .logo {
     font-size: 1.4rem; /* Smaller logo on scroll */
-    transition: font-size 0.3s ease;
   }
 
   
