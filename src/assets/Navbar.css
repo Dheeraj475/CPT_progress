@@ -295,6 +295,8 @@ body {
     flex: unset;
     font-size: 1.4rem;
     white-space: nowrap;
+    position: relative;
+    left : 1rem;
   }
   
   .search-icon {
@@ -310,9 +312,7 @@ body {
 
   .search-container,
   .navbar-bottom,
-  .icon.user-icon,
-  .heart-icon,
-  .user-icon {
+  .heart-icon {
     display: none;
   }
 
