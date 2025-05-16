@@ -128,7 +128,6 @@ body {
   width: 100%;
   background-color: #252a2c;
   z-index: 1000;
-   transform: scale(0.95);
 }
 
 /* Smooth transition for navbar height, padding, and font-size */
