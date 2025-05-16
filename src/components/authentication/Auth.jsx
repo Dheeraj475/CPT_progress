@@ -32,7 +32,7 @@ const Auth = (props) => {
   const toggleForm = () => {
     setIsSignUp(!isSignUp);
     animateFields(isSignUp ? "signupInputs" : "loginInputs");
-    setTimeout(() => animateFields(isSignUp ? "loginInputs" : "signupInputs"), 100);
+    setTimeout(() => animateFields(isSignUp ? "loginInputs" : "signupInputs"), 700);
   };
 
   const animateFields = (formName) => {
