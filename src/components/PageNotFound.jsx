@@ -1,7 +1,7 @@
 import React from 'react';
 import '../assets/PageNotFound.css';
 import { Link } from 'react-router-dom';
-import WallpaperLogo from '../../public/favicon.png';
+import WallpaperLogo from '../assets/images/favicon.png';
 
 const PageNotFound = () => {
   return (
