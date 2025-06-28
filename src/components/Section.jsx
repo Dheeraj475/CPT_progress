@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../assets/Section.css';
 
 const Section = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const img = new Image();
@@ -11,6 +13,10 @@ const Section = () => {
       setImageLoaded(true);
     };
   }, []);
+
+  const handleShopNow = () => {
+    navigate('/products');
+  };
 
   return (
     <>
@@ -41,7 +47,7 @@ const Section = () => {
           promise a transformation that captivates and lasts.
 
           </p>
-          <button className="shop-button">SHOP NOW</button>
+          <button className="shop-button" onClick={handleShopNow}>SHOP NOW</button>
         </div>
       </section>
     </>

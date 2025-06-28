@@ -86,6 +86,62 @@
   transform: scale(1.05);
 }
 
+/* Explore More Section */
+.explore-more-section {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 16px;
+  animation: fadeInUp 0.6s ease;
+}
+
+.explore-more-section h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.explore-more-section p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.explore-more-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.explore-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+  background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @media screen and (min-width: 768px) {
   .grid {
@@ -97,5 +153,24 @@
   .grid-text p {
     font-size: 0.9rem;
   }
+}
+
+@media (max-width: 768px) {
+  .explore-more-section {
+    margin-top: 3rem;
+    padding: 2rem 1rem;
+  }
   
+  .explore-more-section h3 {
+    font-size: 1.6rem;
+  }
+  
+  .explore-more-section p {
+    font-size: 1rem;
+  }
+  
+  .explore-more-btn {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
 }

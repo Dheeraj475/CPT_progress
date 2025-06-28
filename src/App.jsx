@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
 import PageNotFound from './components/PageNotFound';
 import SearchResults from './components/SearchResults';
+import ProductsPage from './components/ProductsPage';
 
 // E-commerce components
 import Cart from './components/Cart';
@@ -48,7 +49,12 @@ const allProducts = [
     title: 'Wall Wonders',
     subtitle: 'WALLPAPER',
     desc: 'Transform your spaces with our stunning collection of wallpapers. Whether you love bold patterns or soft textures, our wallpapers are designed to inspire and bring every wall to life.',
-    price: 2500
+    price: 2500,
+    category: 'wallpaper',
+    rating: 4.5,
+    reviews: 128,
+    brand: 'WallVish',
+    inStock: true
   },
   {
     id: 2,
@@ -56,7 +62,12 @@ const allProducts = [
     title: 'Perfect Control, Stylish Charm',
     subtitle: 'BLINDS',
     desc: 'Add beauty and function with our sleek range of blinds. Tailored to fit any window, our designs balance privacy, light control, and contemporary style for every room.',
-    price: 3500
+    price: 3500,
+    category: 'blinds',
+    rating: 4.3,
+    reviews: 89,
+    brand: 'WallVish',
+    inStock: true
   },
   {
     id: 3,
@@ -64,7 +75,12 @@ const allProducts = [
     title: 'Step into Luxury',
     subtitle: 'VINYL FLOORING',
     desc: 'Durable meets design with our vinyl flooring options. From rustic wood looks to modern textures, experience comfort underfoot and style in every step.',
-    price: 4500
+    price: 4500,
+    category: 'vinyl-flooring',
+    rating: 4.7,
+    reviews: 156,
+    brand: 'WallVish',
+    inStock: true
   },
   {
     id: 4,
@@ -72,7 +88,12 @@ const allProducts = [
     title: 'The perfect Fit',
     subtitle: 'BESPOKE MURALS',
     desc: 'Shop our collection of wall murals. All made to size for your walls.',
-    price: 8500
+    price: 8500,
+    category: 'bespoke-murals',
+    rating: 4.8,
+    reviews: 67,
+    brand: 'WallVish',
+    inStock: true
   },
   {
     id: 5,
@@ -80,7 +101,12 @@ const allProducts = [
     title: 'Framed in Elegance',
     subtitle: 'CRYSTAL FRAMES',
     desc: 'Give your memories the royal treatment with our crystal frames. Designed to sparkle in any light, they make a statement in sophistication and sentiment.',
-    price: 1500
+    price: 1500,
+    category: 'crystal-frames',
+    rating: 4.4,
+    reviews: 203,
+    brand: 'WallVish',
+    inStock: true
   },
   {
     id: 6,
@@ -88,8 +114,66 @@ const allProducts = [
     title: 'Art that Speaks',
     subtitle: 'CANVAS FRAMES',
     desc: 'Turn your walls into galleries with our hand-crafted canvas frames. Rich in color and texture, each piece is a timeless addition to your décor story.',
-    price: 2000
+    price: 2000,
+    category: 'canvas-frames',
+    rating: 4.6,
+    reviews: 145,
+    brand: 'WallVish',
+    inStock: true
   },
+  // Additional products for better filtering demo
+  {
+    id: 7,
+    img: Wallpaper,
+    title: 'Premium Textured Wallpaper',
+    subtitle: 'WALLPAPER',
+    desc: 'Luxury textured wallpaper with premium finish for sophisticated interiors.',
+    price: 3200,
+    category: 'wallpaper',
+    rating: 4.2,
+    reviews: 78,
+    brand: 'Premium',
+    inStock: true
+  },
+  {
+    id: 8,
+    img: Blinds,
+    title: 'Smart Motorized Blinds',
+    subtitle: 'BLINDS',
+    desc: 'Modern motorized blinds with smart home integration and remote control.',
+    price: 5500,
+    category: 'blinds',
+    rating: 4.9,
+    reviews: 34,
+    brand: 'Smart Home',
+    inStock: false
+  },
+  {
+    id: 9,
+    img: VinylFlooring,
+    title: 'Waterproof Vinyl Planks',
+    subtitle: 'VINYL FLOORING',
+    desc: 'Completely waterproof vinyl flooring perfect for kitchens and bathrooms.',
+    price: 3800,
+    category: 'vinyl-flooring',
+    rating: 4.5,
+    reviews: 92,
+    brand: 'AquaFloor',
+    inStock: true
+  },
+  {
+    id: 10,
+    img: CrystalFrames,
+    title: 'LED Crystal Display Frame',
+    subtitle: 'CRYSTAL FRAMES',
+    desc: 'Illuminated crystal frame with LED backlighting for stunning photo display.',
+    price: 2800,
+    category: 'crystal-frames',
+    rating: 4.7,
+    reviews: 56,
+    brand: 'LuxFrame',
+    inStock: true
+  }
 ];
 
 function App() {
@@ -148,6 +232,12 @@ function App() {
                       </>
                     )
                   }
+                />
+
+                {/* Products Page */}
+                <Route 
+                  path="/products" 
+                  element={<ProductsPage allProducts={allProducts} />} 
                 />
 
                 {/* E-commerce Routes */}
