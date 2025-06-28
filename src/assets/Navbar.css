@@ -185,6 +185,7 @@ body {
   position: relative;
   color: inherit;
   text-decoration: none;
+  display: inline-block; /* Ensure proper positioning context */
 }
 
 .cart-badge,
@@ -203,6 +204,7 @@ body {
   justify-content: center;
   font-weight: 600;
   animation: pulse 2s infinite;
+  z-index: 10; /* Ensure badges are always on top */
 }
 
 @keyframes pulse {
@@ -307,6 +309,32 @@ body {
   margin: 0;
 }
 
+/* Fix for scrolled navbar icons positioning */
+.scroll-icons .cart-link,
+.scroll-icons .wishlist-link {
+  position: relative;
+  display: inline-block;
+}
+
+.scroll-icons .cart-badge,
+.scroll-icons .wishlist-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+  z-index: 10;
+}
+
 /* ─── MOBILE MENU ───────────────────────────────────────────────────────────── */
 .mobile-menu {
   position: fixed;
@@ -405,6 +433,32 @@ body {
     gap: 10px;
     align-items: center;
     justify-content: end;
+  }
+
+  /* Ensure mobile badges are properly positioned */
+  .icons .cart-link,
+  .icons .wishlist-link {
+    position: relative;
+    display: inline-block;
+  }
+
+  .icons .cart-badge,
+  .icons .wishlist-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+    z-index: 10;
   }
 
   .search-container,
