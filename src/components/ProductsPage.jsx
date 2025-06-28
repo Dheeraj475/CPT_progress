@@ -157,7 +157,7 @@ const ProductsPage = ({ allProducts = [] }) => {
           🔧 Filters & Sort
         </button>
 
-        {/* Filters Sidebar with Separate Scrollbar */}
+        {/* Filters Sidebar */}
         <div className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
           <div className="filters-header">
             <h3>Filters</h3>
@@ -166,7 +166,6 @@ const ProductsPage = ({ allProducts = [] }) => {
             </button>
           </div>
 
-          {/* Scrollable Filters Content */}
           <div className="filters-content">
             {/* Category Filter */}
             <div className="filter-group">
@@ -274,167 +273,6 @@ const ProductsPage = ({ allProducts = [] }) => {
                 />
                 In Stock Only
               </label>
-            </div>
-
-            {/* Additional Filter Groups for Demo */}
-            <div className="filter-group">
-              <h4>Material</h4>
-              <div className="filter-options">
-                <label>
-                  <input type="radio" name="material" value="" defaultChecked />
-                  All Materials
-                </label>
-                <label>
-                  <input type="radio" name="material" value="vinyl" />
-                  Vinyl
-                </label>
-                <label>
-                  <input type="radio" name="material" value="fabric" />
-                  Fabric
-                </label>
-                <label>
-                  <input type="radio" name="material" value="paper" />
-                  Paper
-                </label>
-                <label>
-                  <input type="radio" name="material" value="wood" />
-                  Wood
-                </label>
-                <label>
-                  <input type="radio" name="material" value="metal" />
-                  Metal
-                </label>
-                <label>
-                  <input type="radio" name="material" value="glass" />
-                  Glass
-                </label>
-                <label>
-                  <input type="radio" name="material" value="crystal" />
-                  Crystal
-                </label>
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Color</h4>
-              <div className="filter-options">
-                <label>
-                  <input type="radio" name="color" value="" defaultChecked />
-                  All Colors
-                </label>
-                <label>
-                  <input type="radio" name="color" value="white" />
-                  White
-                </label>
-                <label>
-                  <input type="radio" name="color" value="black" />
-                  Black
-                </label>
-                <label>
-                  <input type="radio" name="color" value="gray" />
-                  Gray
-                </label>
-                <label>
-                  <input type="radio" name="color" value="brown" />
-                  Brown
-                </label>
-                <label>
-                  <input type="radio" name="color" value="blue" />
-                  Blue
-                </label>
-                <label>
-                  <input type="radio" name="color" value="green" />
-                  Green
-                </label>
-                <label>
-                  <input type="radio" name="color" value="red" />
-                  Red
-                </label>
-                <label>
-                  <input type="radio" name="color" value="yellow" />
-                  Yellow
-                </label>
-                <label>
-                  <input type="radio" name="color" value="multicolor" />
-                  Multicolor
-                </label>
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Room Type</h4>
-              <div className="filter-options">
-                <label>
-                  <input type="radio" name="room" value="" defaultChecked />
-                  All Rooms
-                </label>
-                <label>
-                  <input type="radio" name="room" value="living-room" />
-                  Living Room
-                </label>
-                <label>
-                  <input type="radio" name="room" value="bedroom" />
-                  Bedroom
-                </label>
-                <label>
-                  <input type="radio" name="room" value="kitchen" />
-                  Kitchen
-                </label>
-                <label>
-                  <input type="radio" name="room" value="bathroom" />
-                  Bathroom
-                </label>
-                <label>
-                  <input type="radio" name="room" value="dining-room" />
-                  Dining Room
-                </label>
-                <label>
-                  <input type="radio" name="room" value="office" />
-                  Office
-                </label>
-                <label>
-                  <input type="radio" name="room" value="kids-room" />
-                  Kids Room
-                </label>
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Style</h4>
-              <div className="filter-options">
-                <label>
-                  <input type="radio" name="style" value="" defaultChecked />
-                  All Styles
-                </label>
-                <label>
-                  <input type="radio" name="style" value="modern" />
-                  Modern
-                </label>
-                <label>
-                  <input type="radio" name="style" value="traditional" />
-                  Traditional
-                </label>
-                <label>
-                  <input type="radio" name="style" value="contemporary" />
-                  Contemporary
-                </label>
-                <label>
-                  <input type="radio" name="style" value="vintage" />
-                  Vintage
-                </label>
-                <label>
-                  <input type="radio" name="style" value="minimalist" />
-                  Minimalist
-                </label>
-                <label>
-                  <input type="radio" name="style" value="rustic" />
-                  Rustic
-                </label>
-                <label>
-                  <input type="radio" name="style" value="industrial" />
-                  Industrial
-                </label>
-              </div>
             </div>
           </div>
         </div>
