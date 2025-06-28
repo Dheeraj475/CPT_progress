@@ -46,6 +46,12 @@ const allProducts = [
   {
     id: 1,
     img: Wallpaper,
+    images: [
+      Wallpaper,
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Wall Wonders',
     subtitle: 'WALLPAPER',
     desc: 'Transform your spaces with our stunning collection of wallpapers. Whether you love bold patterns or soft textures, our wallpapers are designed to inspire and bring every wall to life.',
@@ -59,6 +65,12 @@ const allProducts = [
   {
     id: 2,
     img: Blinds,
+    images: [
+      Blinds,
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Perfect Control, Stylish Charm',
     subtitle: 'BLINDS',
     desc: 'Add beauty and function with our sleek range of blinds. Tailored to fit any window, our designs balance privacy, light control, and contemporary style for every room.',
@@ -72,6 +84,12 @@ const allProducts = [
   {
     id: 3,
     img: VinylFlooring,
+    images: [
+      VinylFlooring,
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Step into Luxury',
     subtitle: 'VINYL FLOORING',
     desc: 'Durable meets design with our vinyl flooring options. From rustic wood looks to modern textures, experience comfort underfoot and style in every step.',
@@ -85,6 +103,12 @@ const allProducts = [
   {
     id: 4,
     img: BespokeMurals,
+    images: [
+      BespokeMurals,
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'The perfect Fit',
     subtitle: 'BESPOKE MURALS',
     desc: 'Shop our collection of wall murals. All made to size for your walls.',
@@ -98,6 +122,12 @@ const allProducts = [
   {
     id: 5,
     img: CrystalFrames,
+    images: [
+      CrystalFrames,
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Framed in Elegance',
     subtitle: 'CRYSTAL FRAMES',
     desc: 'Give your memories the royal treatment with our crystal frames. Designed to sparkle in any light, they make a statement in sophistication and sentiment.',
@@ -111,6 +141,12 @@ const allProducts = [
   {
     id: 6,
     img: CanvasFrames,
+    images: [
+      CanvasFrames,
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Art that Speaks',
     subtitle: 'CANVAS FRAMES',
     desc: 'Turn your walls into galleries with our hand-crafted canvas frames. Rich in color and texture, each piece is a timeless addition to your décor story.',
@@ -125,6 +161,12 @@ const allProducts = [
   {
     id: 7,
     img: Wallpaper,
+    images: [
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800',
+      Wallpaper
+    ],
     title: 'Premium Textured Wallpaper',
     subtitle: 'WALLPAPER',
     desc: 'Luxury textured wallpaper with premium finish for sophisticated interiors.',
@@ -138,6 +180,12 @@ const allProducts = [
   {
     id: 8,
     img: Blinds,
+    images: [
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      Blinds,
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Smart Motorized Blinds',
     subtitle: 'BLINDS',
     desc: 'Modern motorized blinds with smart home integration and remote control.',
@@ -151,6 +199,12 @@ const allProducts = [
   {
     id: 9,
     img: VinylFlooring,
+    images: [
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      VinylFlooring,
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ],
     title: 'Waterproof Vinyl Planks',
     subtitle: 'VINYL FLOORING',
     desc: 'Completely waterproof vinyl flooring perfect for kitchens and bathrooms.',
@@ -164,6 +218,12 @@ const allProducts = [
   {
     id: 10,
     img: CrystalFrames,
+    images: [
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1571452/pexels-photo-1571452.jpeg?auto=compress&cs=tinysrgb&w=800',
+      CrystalFrames
+    ],
     title: 'LED Crystal Display Frame',
     subtitle: 'CRYSTAL FRAMES',
     desc: 'Illuminated crystal frame with LED backlighting for stunning photo display.',

@@ -13,9 +13,18 @@ const ProductCard = ({ product }) => {
   const [loginMessage, setLoginMessage] = useState('');
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showAddedAnimation, setShowAddedAnimation] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const isInWishlist = wishlistItems.some(item => item.id === product.id);
   const isInCart = cartItems.some(item => item.id === product.id);
+
+  // Create multiple images for carousel (simulating different angles/views)
+  const productImages = [
+    product.img || product.image,
+    product.img || product.image, // In real app, these would be different images
+    product.img || product.image,
+    product.img || product.image
+  ];
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {
@@ -69,6 +78,18 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  };
+
+  const goToImage = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
@@ -80,28 +101,101 @@ const ProductCard = ({ product }) => {
     <>
       <div className="product-card">
         <div className="product-image">
-          <img src={product.img || product.image} alt={product.title || product.name} />
-          <button 
-            className={`wishlist-btn ${isInWishlist ? 'in-wishlist' : ''}`}
-            onClick={handleToggleWishlist}
-            title={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
-          >
-            {isInWishlist ? '❤️' : '🤍'}
-          </button>
-          
-          {/* Added to Cart Animation */}
-          {showAddedAnimation && (
-            <div className="added-to-cart-animation">
-              <div className="success-checkmark">✓</div>
-              <span>Added to Cart!</span>
+          <div className="image-carousel">
+            {/* Image Counter */}
+            <div className="image-counter">
+              {currentImageIndex + 1}/{productImages.length}
             </div>
-          )}
+
+            {/* Carousel Container */}
+            <div className="carousel-container">
+              <div 
+                className="carousel-track"
+                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+              >
+                {productImages.map((image, index) => (
+                  <div key={index} className="carousel-slide">
+                    <img 
+                      src={image} 
+                      alt={`${product.title || product.name} - View ${index + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            {productImages.length > 1 && (
+              <>
+                <button 
+                  className="carousel-nav prev"
+                  onClick={prevImage}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button 
+                  className="carousel-nav next"
+                  onClick={nextImage}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+              </>
+            )}
+
+            {/* Indicators */}
+            {productImages.length > 1 && (
+              <div className="carousel-indicators">
+                {productImages.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`carousel-indicator ${index === currentImageIndex ? 'active' : ''}`}
+                    onClick={() => goToImage(index)}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Wishlist Button */}
+            <button 
+              className={`wishlist-btn ${isInWishlist ? 'in-wishlist' : ''}`}
+              onClick={handleToggleWishlist}
+              title={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              {isInWishlist ? '❤️' : '🤍'}
+            </button>
+            
+            {/* Added to Cart Animation */}
+            {showAddedAnimation && (
+              <div className="added-to-cart-animation">
+                <div className="success-checkmark">✓</div>
+                <span>Added to Cart!</span>
+              </div>
+            )}
+          </div>
         </div>
         
         <div className="product-info">
           <h4>{product.subtitle}</h4>
           <h3>{product.title || product.name}</h3>
           <p>{product.desc || product.description}</p>
+          
+          {/* Rating and Reviews */}
+          {product.rating && (
+            <div className="product-rating">
+              <span className="rating-stars">
+                {'★'.repeat(Math.floor(product.rating))}
+                {'☆'.repeat(5 - Math.floor(product.rating))}
+              </span>
+              <span className="rating-text">
+                {product.rating} ({product.reviews} reviews)
+              </span>
+            </div>
+          )}
+          
           <div className="product-price">{formatPrice(product.price)}</div>
           
           <div className="product-actions">
