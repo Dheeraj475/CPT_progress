@@ -1,24 +1,58 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import LoginPrompt from './LoginPrompt';
 import '../assets/ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const { addToCart, addToWishlist, removeFromWishlist, wishlistItems } = useCart();
+  const { addToCart, addToWishlist, removeFromWishlist, wishlistItems, cartItems } = useCart();
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [loginMessage, setLoginMessage] = useState('');
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [showAddedAnimation, setShowAddedAnimation] = useState(false);
 
   const isInWishlist = wishlistItems.some(item => item.id === product.id);
+  const isInCart = cartItems.some(item => item.id === product.id);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!isAuthenticated) {
       setLoginMessage('Please login to add items to cart');
       setShowLoginPrompt(true);
       return;
     }
-    addToCart(product);
+
+    setIsAddingToCart(true);
+    
+    // Simulate adding to cart with animation
+    setTimeout(() => {
+      addToCart(product);
+      setIsAddingToCart(false);
+      setShowAddedAnimation(true);
+      
+      // Hide animation after 2 seconds
+      setTimeout(() => {
+        setShowAddedAnimation(false);
+      }, 2000);
+    }, 800);
+  };
+
+  const handleBuyNow = () => {
+    if (!isAuthenticated) {
+      setLoginMessage('Please login to buy this item');
+      setShowLoginPrompt(true);
+      return;
+    }
+
+    // Add to cart if not already added
+    if (!isInCart) {
+      addToCart(product);
+    }
+    
+    // Navigate to checkout
+    navigate('/checkout');
   };
 
   const handleToggleWishlist = () => {
@@ -54,6 +88,14 @@ const ProductCard = ({ product }) => {
           >
             {isInWishlist ? '❤️' : '🤍'}
           </button>
+          
+          {/* Added to Cart Animation */}
+          {showAddedAnimation && (
+            <div className="added-to-cart-animation">
+              <div className="success-checkmark">✓</div>
+              <span>Added to Cart!</span>
+            </div>
+          )}
         </div>
         
         <div className="product-info">
@@ -62,9 +104,47 @@ const ProductCard = ({ product }) => {
           <p>{product.desc || product.description}</p>
           <div className="product-price">{formatPrice(product.price)}</div>
           
-          <button className="add-to-cart-btn" onClick={handleAddToCart}>
-            🛒 Add to Cart
-          </button>
+          <div className="product-actions">
+            {isInCart ? (
+              <div className="cart-actions">
+                <button 
+                  className="buy-now-btn"
+                  onClick={handleBuyNow}
+                >
+                  🛒 Buy Now
+                </button>
+                <button 
+                  className="go-to-cart-btn"
+                  onClick={() => navigate('/cart')}
+                >
+                  📦 Go to Cart
+                </button>
+              </div>
+            ) : (
+              <div className="cart-actions">
+                <button 
+                  className={`add-to-cart-btn ${isAddingToCart ? 'loading' : ''}`}
+                  onClick={handleAddToCart}
+                  disabled={isAddingToCart}
+                >
+                  {isAddingToCart ? (
+                    <>
+                      <span className="loading-spinner"></span>
+                      Adding...
+                    </>
+                  ) : (
+                    <>🛒 Add to Cart</>
+                  )}
+                </button>
+                <button 
+                  className="buy-now-btn"
+                  onClick={handleBuyNow}
+                >
+                  ⚡ Buy Now
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
