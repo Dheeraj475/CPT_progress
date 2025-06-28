@@ -29,12 +29,12 @@ const ProductsPage = ({ allProducts }) => {
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = allProducts.filter(product => {
-      // Search filter
+      // Search filter - safely handle undefined properties
       const searchMatch = !searchQuery || 
-        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchQuery.toLowerCase());
+        (product.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.subtitle || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.desc || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.category || '').toLowerCase().includes(searchQuery.toLowerCase());
 
       const categoryMatch = !filters.category || product.category === filters.category;
       const priceMatch = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
