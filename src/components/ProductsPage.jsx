@@ -91,7 +91,7 @@ const ProductsPage = ({ allProducts }) => {
     <div className="products-page">
       <div className="products-header">
         <div className="breadcrumb">
-          <span>Home</span> &gt; <span>Products</span>
+          <span>Home</span> > <span>Products</span>
         </div>
         <h1>All Products</h1>
         <p>Showing {filteredAndSortedProducts.length} of {allProducts.length} products</p>
@@ -106,7 +106,7 @@ const ProductsPage = ({ allProducts }) => {
           🔧 Filters & Sort
         </button>
 
-        {/* Filters Sidebar */}
+        {/* Filters Sidebar with Separate Scrollbar */}
         <div className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
           <div className="filters-header">
             <h3>Filters</h3>
@@ -115,112 +115,276 @@ const ProductsPage = ({ allProducts }) => {
             </button>
           </div>
 
-          {/* Category Filter */}
-          <div className="filter-group">
-            <h4>Category</h4>
-            <div className="filter-options">
-              <label>
-                <input
-                  type="radio"
-                  name="category"
-                  value=""
-                  checked={filters.category === ''}
-                  onChange={(e) => handleFilterChange('category', e.target.value)}
-                />
-                All Categories
-              </label>
-              {categories.map(category => (
-                <label key={category}>
+          {/* Scrollable Filters Content */}
+          <div className="filters-content">
+            {/* Category Filter */}
+            <div className="filter-group">
+              <h4>Category</h4>
+              <div className="filter-options">
+                <label>
                   <input
                     type="radio"
                     name="category"
-                    value={category}
-                    checked={filters.category === category}
+                    value=""
+                    checked={filters.category === ''}
                     onChange={(e) => handleFilterChange('category', e.target.value)}
                   />
-                  {category.replace('-', ' ').toUpperCase()}
+                  All Categories
                 </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Price Range Filter */}
-          <div className="filter-group">
-            <h4>Price Range</h4>
-            <div className="price-range">
-              <input
-                type="range"
-                min="0"
-                max={maxPrice}
-                value={filters.priceRange[1]}
-                onChange={(e) => handleFilterChange('priceRange', [0, parseInt(e.target.value)])}
-                className="price-slider"
-              />
-              <div className="price-display">
-                {formatPrice(0)} - {formatPrice(filters.priceRange[1])}
+                {categories.map(category => (
+                  <label key={category}>
+                    <input
+                      type="radio"
+                      name="category"
+                      value={category}
+                      checked={filters.category === category}
+                      onChange={(e) => handleFilterChange('category', e.target.value)}
+                    />
+                    {category.replace('-', ' ').toUpperCase()}
+                  </label>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Rating Filter */}
-          <div className="filter-group">
-            <h4>Customer Rating</h4>
-            <div className="filter-options">
-              {[4, 3, 2, 1, 0].map(rating => (
-                <label key={rating}>
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={rating}
-                    checked={filters.rating === rating}
-                    onChange={(e) => handleFilterChange('rating', parseInt(e.target.value))}
-                  />
-                  {rating > 0 ? `${rating}★ & above` : 'All Ratings'}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Brand Filter */}
-          <div className="filter-group">
-            <h4>Brand</h4>
-            <div className="filter-options">
-              <label>
+            {/* Price Range Filter */}
+            <div className="filter-group">
+              <h4>Price Range</h4>
+              <div className="price-range">
                 <input
-                  type="radio"
-                  name="brand"
-                  value=""
-                  checked={filters.brand === ''}
-                  onChange={(e) => handleFilterChange('brand', e.target.value)}
+                  type="range"
+                  min="0"
+                  max={maxPrice}
+                  value={filters.priceRange[1]}
+                  onChange={(e) => handleFilterChange('priceRange', [0, parseInt(e.target.value)])}
+                  className="price-slider"
                 />
-                All Brands
-              </label>
-              {brands.map(brand => (
-                <label key={brand}>
+                <div className="price-display">
+                  {formatPrice(0)} - {formatPrice(filters.priceRange[1])}
+                </div>
+              </div>
+            </div>
+
+            {/* Rating Filter */}
+            <div className="filter-group">
+              <h4>Customer Rating</h4>
+              <div className="filter-options">
+                {[4, 3, 2, 1, 0].map(rating => (
+                  <label key={rating}>
+                    <input
+                      type="radio"
+                      name="rating"
+                      value={rating}
+                      checked={filters.rating === rating}
+                      onChange={(e) => handleFilterChange('rating', parseInt(e.target.value))}
+                    />
+                    {rating > 0 ? `${rating}★ & above` : 'All Ratings'}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Brand Filter */}
+            <div className="filter-group">
+              <h4>Brand</h4>
+              <div className="filter-options">
+                <label>
                   <input
                     type="radio"
                     name="brand"
-                    value={brand}
-                    checked={filters.brand === brand}
+                    value=""
+                    checked={filters.brand === ''}
                     onChange={(e) => handleFilterChange('brand', e.target.value)}
                   />
-                  {brand}
+                  All Brands
                 </label>
-              ))}
+                {brands.map(brand => (
+                  <label key={brand}>
+                    <input
+                      type="radio"
+                      name="brand"
+                      value={brand}
+                      checked={filters.brand === brand}
+                      onChange={(e) => handleFilterChange('brand', e.target.value)}
+                    />
+                    {brand}
+                  </label>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Stock Filter */}
-          <div className="filter-group">
-            <h4>Availability</h4>
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={filters.inStock}
-                onChange={(e) => handleFilterChange('inStock', e.target.checked)}
-              />
-              In Stock Only
-            </label>
+            {/* Stock Filter */}
+            <div className="filter-group">
+              <h4>Availability</h4>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={filters.inStock}
+                  onChange={(e) => handleFilterChange('inStock', e.target.checked)}
+                />
+                In Stock Only
+              </label>
+            </div>
+
+            {/* Additional Filter Groups for Demo */}
+            <div className="filter-group">
+              <h4>Material</h4>
+              <div className="filter-options">
+                <label>
+                  <input type="radio" name="material" value="" defaultChecked />
+                  All Materials
+                </label>
+                <label>
+                  <input type="radio" name="material" value="vinyl" />
+                  Vinyl
+                </label>
+                <label>
+                  <input type="radio" name="material" value="fabric" />
+                  Fabric
+                </label>
+                <label>
+                  <input type="radio" name="material" value="paper" />
+                  Paper
+                </label>
+                <label>
+                  <input type="radio" name="material" value="wood" />
+                  Wood
+                </label>
+                <label>
+                  <input type="radio" name="material" value="metal" />
+                  Metal
+                </label>
+                <label>
+                  <input type="radio" name="material" value="glass" />
+                  Glass
+                </label>
+                <label>
+                  <input type="radio" name="material" value="crystal" />
+                  Crystal
+                </label>
+              </div>
+            </div>
+
+            <div className="filter-group">
+              <h4>Color</h4>
+              <div className="filter-options">
+                <label>
+                  <input type="radio" name="color" value="" defaultChecked />
+                  All Colors
+                </label>
+                <label>
+                  <input type="radio" name="color" value="white" />
+                  White
+                </label>
+                <label>
+                  <input type="radio" name="color" value="black" />
+                  Black
+                </label>
+                <label>
+                  <input type="radio" name="color" value="gray" />
+                  Gray
+                </label>
+                <label>
+                  <input type="radio" name="color" value="brown" />
+                  Brown
+                </label>
+                <label>
+                  <input type="radio" name="color" value="blue" />
+                  Blue
+                </label>
+                <label>
+                  <input type="radio" name="color" value="green" />
+                  Green
+                </label>
+                <label>
+                  <input type="radio" name="color" value="red" />
+                  Red
+                </label>
+                <label>
+                  <input type="radio" name="color" value="yellow" />
+                  Yellow
+                </label>
+                <label>
+                  <input type="radio" name="color" value="multicolor" />
+                  Multicolor
+                </label>
+              </div>
+            </div>
+
+            <div className="filter-group">
+              <h4>Room Type</h4>
+              <div className="filter-options">
+                <label>
+                  <input type="radio" name="room" value="" defaultChecked />
+                  All Rooms
+                </label>
+                <label>
+                  <input type="radio" name="room" value="living-room" />
+                  Living Room
+                </label>
+                <label>
+                  <input type="radio" name="room" value="bedroom" />
+                  Bedroom
+                </label>
+                <label>
+                  <input type="radio" name="room" value="kitchen" />
+                  Kitchen
+                </label>
+                <label>
+                  <input type="radio" name="room" value="bathroom" />
+                  Bathroom
+                </label>
+                <label>
+                  <input type="radio" name="room" value="dining-room" />
+                  Dining Room
+                </label>
+                <label>
+                  <input type="radio" name="room" value="office" />
+                  Office
+                </label>
+                <label>
+                  <input type="radio" name="room" value="kids-room" />
+                  Kids Room
+                </label>
+              </div>
+            </div>
+
+            <div className="filter-group">
+              <h4>Style</h4>
+              <div className="filter-options">
+                <label>
+                  <input type="radio" name="style" value="" defaultChecked />
+                  All Styles
+                </label>
+                <label>
+                  <input type="radio" name="style" value="modern" />
+                  Modern
+                </label>
+                <label>
+                  <input type="radio" name="style" value="traditional" />
+                  Traditional
+                </label>
+                <label>
+                  <input type="radio" name="style" value="contemporary" />
+                  Contemporary
+                </label>
+                <label>
+                  <input type="radio" name="style" value="vintage" />
+                  Vintage
+                </label>
+                <label>
+                  <input type="radio" name="style" value="minimalist" />
+                  Minimalist
+                </label>
+                <label>
+                  <input type="radio" name="style" value="rustic" />
+                  Rustic
+                </label>
+                <label>
+                  <input type="radio" name="style" value="industrial" />
+                  Industrial
+                </label>
+              </div>
+            </div>
           </div>
         </div>
 
