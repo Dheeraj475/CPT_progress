@@ -18,13 +18,12 @@ const ProductCard = ({ product }) => {
   const isInWishlist = wishlistItems.some(item => item.id === product.id);
   const isInCart = cartItems.some(item => item.id === product.id);
 
-  // Create multiple images for carousel (simulating different angles/views)
-  const productImages = [
-    product.img || product.image,
-    product.img || product.image, // In real app, these would be different images
-    product.img || product.image,
-    product.img || product.image
-  ];
+  // Create product images array with proper fallback handling
+  const productImages = product.images && product.images.length > 0 
+    ? product.images 
+    : product.img 
+      ? [product.img]
+      : ['https://via.placeholder.com/300x300?text=No+Image'];
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {
