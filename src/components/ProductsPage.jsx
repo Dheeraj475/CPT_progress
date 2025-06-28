@@ -17,8 +17,8 @@ const ProductsPage = ({ allProducts }) => {
   const productsPerPage = 12;
 
   // Get unique values for filter options
-  const categories = [...new Set(allProducts.map(p => p.category))];
-  const brands = [...new Set(allProducts.map(p => p.brand))];
+  const categories = [...new Set(allProducts.map(p => p.category))].filter(Boolean);
+  const brands = [...new Set(allProducts.map(p => p.brand))].filter(Boolean);
   const maxPrice = Math.max(...allProducts.map(p => p.price));
 
   // Filter and sort products
@@ -140,7 +140,7 @@ const ProductsPage = ({ allProducts }) => {
                       checked={filters.category === category}
                       onChange={(e) => handleFilterChange('category', e.target.value)}
                     />
-                    {category.replace('-', ' ').toUpperCase()}
+                    {typeof category === 'string' ? category.replace('-', ' ').toUpperCase() : category}
                   </label>
                 ))}
               </div>
