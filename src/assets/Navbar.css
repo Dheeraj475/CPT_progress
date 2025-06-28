@@ -31,7 +31,6 @@ body {
   flex-wrap: wrap;
 }
 
-
 .nav-logo {
   display: none;
   color: white;
@@ -48,7 +47,10 @@ body {
   font-weight: bold;
 }
 
-
+.logo a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* Search box */
 .search-container {
@@ -59,7 +61,6 @@ body {
   max-width: 500px;
   z-index: 1;
 }
-
 
 .search-input {
   width: 100%;
@@ -101,6 +102,39 @@ body {
 .icon:hover {
   transform: scale(1.1);
 }
+
+/* Cart and Wishlist badges */
+.cart-link,
+.wishlist-link {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cart-badge,
+.wishlist-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
 /* Hamburger */
 .hamburger {
   display: none;
@@ -144,18 +178,15 @@ body {
   opacity: 0.9;
 }
 
-
 .navbar.scrolled .navbar-bottom .nav-item {
   font-size: 0.8rem;
 }
-
 
 /* remove the old left‑margin hack so centering really works */
 .nav-left {
   margin-left: 0;  /* was 20px—remove it */
   flex: none;      /* reset any flex:auto you had */
 }
-
 
 .navbar.scrolled .nav-logo {
   display: block;
@@ -175,7 +206,6 @@ body {
   padding: 1rem 0.5rem;
   transition: color 0.2s;
   white-space: nowrap;
-  
 }
 
 .navbar.scrolled .nav-item {
@@ -183,16 +213,13 @@ body {
   font-weight: 500;
   cursor: pointer;
   padding: 1.3rem 0.5rem;
-  
 }
-
 
 .nav-item:hover {
   color: black;
   border-top-right-radius: 0.6rem;
   border-top-left-radius: 0.6rem;
   background-color: #fff;
-
 }
 
 .scroll-icons {
@@ -242,12 +269,7 @@ body {
   .navbar.scrolled .logo {
     font-size: 1.4rem; /* Smaller logo on scroll */
   }
-
-  
-
 }
-
-
 
 /* Style search icon */
 .mobile-search-icon .icon {
@@ -330,7 +352,6 @@ body {
     display: flex;
     font-size: 1.4rem;
   }
-
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
@@ -345,4 +366,3 @@ body {
     padding: 1.3rem 1rem;
   }
 }
-

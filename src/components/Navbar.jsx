@@ -10,11 +10,12 @@ import {
   FaPlus,
   FaMinus,
 } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import '../assets/Navbar.css';
 import '../assets/NavDropdown.css';
 import '../assets/NavAccordion.css';
 import logo from '../assets/images/wallvish-logo.png';
-
 
 const navItems = [
   {
@@ -70,8 +71,8 @@ const navItems = [
       { title: 'Accessories', items: ['WALLPAPER TOOLS'] }
     ]
   },
-  /* …other top-level nav items… */
 ];
+
 const Navbar = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -80,38 +81,38 @@ const Navbar = (props) => {
   const [mobileAccordions, setMobileAccordions] = useState({});
   const isMobile = window.innerWidth < 768;
 
+  const { isAuthenticated, user, logout } = useAuth();
+  const { getCartItemsCount, wishlistItems } = useCart();
+
   const accountRef = useRef();
 
-const toggleAccountDropdown = () => {
-  setShowAccountDropdown(prev => !prev);
-};
-
-const toggleAccordion = (label) => {
-  setMobileAccordions((prev) => ({
-    ...prev,
-    [label]: !prev[label],
-  }));
-};
-
-
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (accountRef.current && !accountRef.current.contains(event.target)) {
-      setShowAccountDropdown(false);
-    }
+  const toggleAccountDropdown = () => {
+    setShowAccountDropdown(prev => !prev);
   };
-  document.addEventListener('mousedown', handleClickOutside);
-  return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-  };
-}, [accountRef]);
 
+  const toggleAccordion = (label) => {
+    setMobileAccordions((prev) => ({
+      ...prev,
+      [label]: !prev[label],
+    }));
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (accountRef.current && !accountRef.current.contains(event.target)) {
+        setShowAccountDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [accountRef]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
-
   }, []);
 
   return (
@@ -119,21 +120,17 @@ useEffect(() => {
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         {/* TOP ROW: logo / search / icons */}
         <div className="navbar-top">
-        <div className="hamburger" onClick={() => setMenuOpen(open => !open)}>
-              {menuOpen
-                ? <FaTimes className="icon" />
-                : <FaBars className="icon" />
-              }
-        </div>
-        <div className="mobile-search-icon">
-          <FaSearch className="icon" />
-        </div>
+          <div className="hamburger" onClick={() => setMenuOpen(open => !open)}>
+            {menuOpen
+              ? <FaTimes className="icon" />
+              : <FaBars className="icon" />
+            }
+          </div>
+          <div className="mobile-search-icon">
+            <FaSearch className="icon" />
+          </div>
 
-        
-
-
-
-        <div className="logo"><Link to="/">WallVish Decor</Link></div>
+          <div className="logo"><Link to="/">WallVish Decor</Link></div>
           
           <div className="search-container">
             <input
@@ -145,36 +142,66 @@ useEffect(() => {
           </div>
 
           <div className="icons">
-          <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
-          <FaUserCircle className="icon user-icon"/>
-          {showAccountDropdown && (
-            <div className="account-dropdown">
-              <div className="dropdown-arrow" />
-              <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
-                <div className="dropdown-item"><Link to="/auth/login"><strong>SIGN IN</strong></Link></div>
-                <div className="dropdown-item"><Link to="/auth/register"><strong>REGISTER</strong></Link></div>
-              </div>
+            <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
+              <FaUserCircle className="icon user-icon"/>
+              {showAccountDropdown && (
+                <div className="account-dropdown">
+                  <div className="dropdown-arrow" />
+                  <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
+                    {isAuthenticated ? (
+                      <>
+                        <div className="dropdown-item">
+                          <Link to="/profile"><strong>My Profile</strong></Link>
+                        </div>
+                        <div className="dropdown-item">
+                          <Link to="/profile"><strong>My Orders</strong></Link>
+                        </div>
+                        <div className="dropdown-item" onClick={logout}>
+                          <strong>Logout</strong>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="dropdown-item">
+                          <Link to="/auth/login"><strong>SIGN IN</strong></Link>
+                        </div>
+                        <div className="dropdown-item">
+                          <Link to="/auth/register"><strong>REGISTER</strong></Link>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-          </div>
-            <FaShoppingCart className="icon" />
-            <FaHeart className="icon heart-icon" />
             
+            <Link to="/cart" className="cart-link">
+              <FaShoppingCart className="icon" />
+              {getCartItemsCount() > 0 && (
+                <span className="cart-badge">{getCartItemsCount()}</span>
+              )}
+            </Link>
+            
+            <Link to="/wishlist" className="wishlist-link">
+              <FaHeart className="icon heart-icon" />
+              {wishlistItems.length > 0 && (
+                <span className="wishlist-badge">{wishlistItems.length}</span>
+              )}
+            </Link>
           </div>
         </div>
 
         {/* BOTTOM ROW: category links */}
         <nav className="navbar-bottom">
           <div className="nav-left">
-          <Link onClick={props.handleClick} to="/">
-            <img
-            src={logo}
-            alt="Logo"  
-            className="nav-logo responsive-logo"
-            />
-          </Link> 
+            <Link onClick={props.handleClick} to="/">
+              <img
+                src={logo}
+                alt="Logo"  
+                className="nav-logo responsive-logo"
+              />
+            </Link> 
           </div>
-
 
           {navItems.map(nav => (
             <div
@@ -183,7 +210,6 @@ useEffect(() => {
               onMouseEnter={() => !isMobile && setActiveDropdown(nav.label)}
               onMouseLeave={() => !isMobile && setActiveDropdown(null)}
             >
-              
               {nav.label}
               {activeDropdown === nav.label && (
                 <div className="mega-dropdown">
@@ -199,95 +225,114 @@ useEffect(() => {
                       </ul>
                     </div>
                   ))}
-                  {/* only for the first nav (wallpaper) */}
-                  {/* {nav.label === 'WALLPAPER' && (
-                    <a href="/wallpaper" className="cta-button">
-                      View All Wallpaper
-                    </a>
-                  )} */}
                 </div>
-               
               )}
             </div>
-            
           ))}
 
-        {scrolled && (
+          {scrolled && (
             <div className="scroll-icons">
-          <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
-          <FaUserCircle className="icon user-icon" />
-          {showAccountDropdown && (
-            <div className="account-dropdown">
-              <div className="dropdown-arrow" />
-              <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
-                <div className="dropdown-item"><Link to="/auth/login"><strong>SIGN IN</strong></Link></div>
-                <div className="dropdown-item"><Link to="/auth/register"><strong>REGISTER</strong></Link></div>
+              <div className="user-dropdown-wrapper" onClick={toggleAccountDropdown} ref={accountRef}>
+                <FaUserCircle className="icon user-icon" />
+                {showAccountDropdown && (
+                  <div className="account-dropdown">
+                    <div className="dropdown-arrow" />
+                    <div className="dropdown-content" onMouseLeave={() => setShowAccountDropdown(false)}>
+                      {isAuthenticated ? (
+                        <>
+                          <div className="dropdown-item">
+                            <Link to="/profile"><strong>My Profile</strong></Link>
+                          </div>
+                          <div className="dropdown-item">
+                            <Link to="/profile"><strong>My Orders</strong></Link>
+                          </div>
+                          <div className="dropdown-item" onClick={logout}>
+                            <strong>Logout</strong>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="dropdown-item">
+                            <Link to="/auth/login"><strong>SIGN IN</strong></Link>
+                          </div>
+                          <div className="dropdown-item">
+                            <Link to="/auth/register"><strong>REGISTER</strong></Link>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
+              
+              <Link to="/cart">
+                <FaShoppingCart className="icon" />
+                {getCartItemsCount() > 0 && (
+                  <span className="cart-badge">{getCartItemsCount()}</span>
+                )}
+              </Link>
+              
+              <Link to="/wishlist">
+                <FaHeart className="icon" />
+                {wishlistItems.length > 0 && (
+                  <span className="wishlist-badge">{wishlistItems.length}</span>
+                )}
+              </Link>
             </div>
           )}
-          </div>
-              <FaShoppingCart className="icon" />
-              <FaHeart className="icon" />
-            </div>
-        )}
         </nav>
-         <span className="white-line"></span>
+        <span className="white-line"></span>
       </header>
 
       {/* MOBILE SLIDE-IN MENU */}
       {menuOpen && (
-  <div className="mobile-menu">
-    {navItems.map(({ label, columns }) => {
-      const isSectionOpen = mobileAccordions[label];
+        <div className="mobile-menu">
+          {navItems.map(({ label, columns }) => {
+            const isSectionOpen = mobileAccordions[label];
 
-      return (
-        <div key={label} className="accordion-section">
-          <div className="accordion-header" onClick={() => toggleAccordion(label)}>
-            <span className="accordion-label">{label}</span>
-            <span className="accordion-icon">
-              {isSectionOpen ? <FaMinus /> : <FaPlus />}
-            </span>
-          </div>
+            return (
+              <div key={label} className="accordion-section">
+                <div className="accordion-header" onClick={() => toggleAccordion(label)}>
+                  <span className="accordion-label">{label}</span>
+                  <span className="accordion-icon">
+                    {isSectionOpen ? <FaMinus /> : <FaPlus />}
+                  </span>
+                </div>
 
-          {isSectionOpen && (
-            <div className="accordion-subsection">
-              {columns.map(({ title, items }) => {
-                const titleKey = `${label}-${title}`;
-                const isTitleOpen = mobileAccordions[titleKey];
+                {isSectionOpen && (
+                  <div className="accordion-subsection">
+                    {columns.map(({ title, items }) => {
+                      const titleKey = `${label}-${title}`;
+                      const isTitleOpen = mobileAccordions[titleKey];
 
-                return (
-                  <div key={title} className="nested-accordion">
-                    <div className="accordion-header" onClick={() => toggleAccordion(titleKey)}>
-                      <span className="accordion-title">{title}</span>
-                      <span className="accordion-icon">
-                        {isTitleOpen ? <FaMinus /> : <FaPlus />}
-                      </span>
-                    </div>
+                      return (
+                        <div key={title} className="nested-accordion">
+                          <div className="accordion-header" onClick={() => toggleAccordion(titleKey)}>
+                            <span className="accordion-title">{title}</span>
+                            <span className="accordion-icon">
+                              {isTitleOpen ? <FaMinus /> : <FaPlus />}
+                            </span>
+                          </div>
 
-                    {isTitleOpen && (
-                      <ul className="accordion-list">
-                        {items.map((item) => (
-                          <li key={item}>
-                            <a href="#" className="accordion-link">{item}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                          {isTitleOpen && (
+                            <ul className="accordion-list">
+                              {items.map((item) => (
+                                <li key={item}>
+                                  <a href="#" className="accordion-link">{item}</a>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
-          )}
+                )}
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-    
-  </div>
-
-)}
-
-
-
+      )}
     </>
   );
 };
