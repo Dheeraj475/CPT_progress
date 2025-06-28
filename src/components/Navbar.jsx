@@ -321,14 +321,14 @@ const Navbar = ({ handleClick, onSearch }) => {
                 )}
               </div>
               
-              <Link to="/cart">
+              <Link to="/cart" className="cart-link">
                 <FaShoppingCart className="icon" />
                 {getCartItemsCount() > 0 && (
                   <span className="cart-badge">{getCartItemsCount()}</span>
                 )}
               </Link>
               
-              <Link to="/wishlist">
+              <Link to="/wishlist" className="wishlist-link">
                 <FaHeart className="icon" />
                 {wishlistItems.length > 0 && (
                   <span className="wishlist-badge">{wishlistItems.length}</span>

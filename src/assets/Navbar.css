@@ -213,6 +213,12 @@ body {
   100% { transform: scale(1); }
 }
 
+/* Hide badges in top navbar when scrolled */
+.navbar.scrolled .navbar-top .cart-badge,
+.navbar.scrolled .navbar-top .wishlist-badge {
+  display: none;
+}
+
 /* Hamburger */
 .hamburger {
   display: none;
@@ -309,15 +315,15 @@ body {
   margin: 0;
 }
 
-/* Fix for scrolled navbar icons positioning */
-.scroll-icons .cart-link,
-.scroll-icons .wishlist-link {
+/* Show badges in bottom navbar when scrolled */
+.navbar.scrolled .scroll-icons .cart-link,
+.navbar.scrolled .scroll-icons .wishlist-link {
   position: relative;
   display: inline-block;
 }
 
-.scroll-icons .cart-badge,
-.scroll-icons .wishlist-badge {
+.navbar.scrolled .scroll-icons .cart-badge,
+.navbar.scrolled .scroll-icons .wishlist-badge {
   position: absolute;
   top: -8px;
   right: -8px;
