@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -15,6 +15,7 @@ import GoogleReviews from './components/GoogleReviews';
 import Footer from './components/Footer';
 import ScrollToTop from './components/utils/ScrollToTop';
 import PageNotFound from './components/PageNotFound';
+import SearchResults from './components/SearchResults';
 
 // E-commerce components
 import Cart from './components/Cart';
@@ -28,12 +29,93 @@ import Profile from './components/Profile';
 import Delivery from './components/footer-routing/Delivery';
 import Returns from './components/footer-routing/Returns';
 import Service from './components/footer-routing/Service';
-import Auth from './components/authentication/Auth';
+import Login from './components/authentication/Login';
+import Register from './components/authentication/Register';
 import Section from './components/Section';
 
+// Import product data
+import Wallpaper from './assets/images/wallpaper.jpg'
+import Blinds from './assets/images/blinds.jpg'
+import VinylFlooring from './assets/images/vinyl-flooring.jpg'
+import BespokeMurals from './assets/images/bespoke-murals.jpg'
+import CrystalFrames from './assets/images/crystal-frames.jpg'
+import CanvasFrames from './assets/images/canvas-frames.jpg'
+
+const allProducts = [
+  {
+    id: 1,
+    img: Wallpaper,
+    title: 'Wall Wonders',
+    subtitle: 'WALLPAPER',
+    desc: 'Transform your spaces with our stunning collection of wallpapers. Whether you love bold patterns or soft textures, our wallpapers are designed to inspire and bring every wall to life.',
+    price: 2500
+  },
+  {
+    id: 2,
+    img: Blinds,
+    title: 'Perfect Control, Stylish Charm',
+    subtitle: 'BLINDS',
+    desc: 'Add beauty and function with our sleek range of blinds. Tailored to fit any window, our designs balance privacy, light control, and contemporary style for every room.',
+    price: 3500
+  },
+  {
+    id: 3,
+    img: VinylFlooring,
+    title: 'Step into Luxury',
+    subtitle: 'VINYL FLOORING',
+    desc: 'Durable meets design with our vinyl flooring options. From rustic wood looks to modern textures, experience comfort underfoot and style in every step.',
+    price: 4500
+  },
+  {
+    id: 4,
+    img: BespokeMurals,
+    title: 'The perfect Fit',
+    subtitle: 'BESPOKE MURALS',
+    desc: 'Shop our collection of wall murals. All made to size for your walls.',
+    price: 8500
+  },
+  {
+    id: 5,
+    img: CrystalFrames,
+    title: 'Framed in Elegance',
+    subtitle: 'CRYSTAL FRAMES',
+    desc: 'Give your memories the royal treatment with our crystal frames. Designed to sparkle in any light, they make a statement in sophistication and sentiment.',
+    price: 1500
+  },
+  {
+    id: 6,
+    img: CanvasFrames,
+    title: 'Art that Speaks',
+    subtitle: 'CANVAS FRAMES',
+    desc: 'Turn your walls into galleries with our hand-crafted canvas frames. Rich in color and texture, each piece is a timeless addition to your décor story.',
+    price: 2000
+  },
+];
+
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   const handleClick = () => {
     window.scrollTo(0, 0);
+  };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    
+    // Filter products based on search query
+    const results = allProducts.filter(product => 
+      product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.subtitle.toLowerCase().includes(query.toLowerCase()) ||
+      product.desc.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    setSearchResults(results);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    setSearchResults([]);
   };
 
   return (
@@ -42,7 +124,7 @@ function App() {
         <div className="App">
           <BrowserRouter>
             <ScrollToTop />
-            <Navbar handleClick={handleClick} />
+            <Navbar handleClick={handleClick} onSearch={handleSearch} />
 
             <div className="main-content">
               <Routes>
@@ -50,13 +132,21 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <>
-                      <Section />
-                      <FeatureGrid />
-                      <Reading />
-                      <GoogleReviews />
-                      <SustainabilityReport />
-                    </>
+                    searchQuery ? (
+                      <SearchResults 
+                        searchQuery={searchQuery}
+                        searchResults={searchResults}
+                        onClearSearch={clearSearch}
+                      />
+                    ) : (
+                      <>
+                        <Section />
+                        <FeatureGrid />
+                        <Reading />
+                        <GoogleReviews />
+                        <SustainabilityReport />
+                      </>
+                    )
                   }
                 />
 
@@ -68,11 +158,9 @@ function App() {
                 <Route path="/track-order/:orderId" element={<TrackOrder />} />
                 <Route path="/profile" element={<Profile />} />
 
-                {/* Authentication Nested Routing */}
-                <Route path="/auth">
-                  <Route path="login" element={<Auth handleClick={handleClick} mode="login" />} />
-                  <Route path="register" element={<Auth handleClick={handleClick} mode="register" />} />
-                </Route>
+                {/* Authentication Routes */}
+                <Route path="/auth/login" element={<Login />} />
+                <Route path="/auth/register" element={<Register />} />
 
                 {/* Footer Routing */}
                 <Route path="/service" element={<Service />} />

@@ -73,18 +73,21 @@ const navItems = [
   },
 ];
 
-const Navbar = (props) => {
+const Navbar = ({ handleClick, onSearch }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showAccountDropdown, setShowAccountDropdown] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileAccordions, setMobileAccordions] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
   const isMobile = window.innerWidth < 768;
 
   const { isAuthenticated, user, logout } = useAuth();
   const { getCartItemsCount, wishlistItems } = useCart();
 
   const accountRef = useRef();
+  const searchRef = useRef();
 
   const toggleAccountDropdown = () => {
     setShowAccountDropdown(prev => !prev);
@@ -95,6 +98,26 @@ const Navbar = (props) => {
       ...prev,
       [label]: !prev[label],
     }));
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim() && onSearch) {
+      onSearch(searchQuery.trim());
+    }
+  };
+
+  const handleMobileSearchToggle = () => {
+    setShowMobileSearch(prev => !prev);
+    if (!showMobileSearch) {
+      setTimeout(() => {
+        searchRef.current?.focus();
+      }, 100);
+    }
   };
 
   useEffect(() => {
@@ -126,19 +149,26 @@ const Navbar = (props) => {
               : <FaBars className="icon" />
             }
           </div>
-          <div className="mobile-search-icon">
+          
+          <div className="mobile-search-icon" onClick={handleMobileSearchToggle}>
             <FaSearch className="icon" />
           </div>
 
           <div className="logo"><Link to="/">WallVish Decor</Link></div>
           
           <div className="search-container">
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search wallpapers, vinyl flooring, crystal frames..."
-            />
-            <FaSearch className="search-icon" />
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search wallpapers, vinyl flooring, crystal frames..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              <button type="submit" className="search-icon-btn">
+                <FaSearch className="search-icon" />
+              </button>
+            </form>
           </div>
 
           <div className="icons">
@@ -191,10 +221,36 @@ const Navbar = (props) => {
           </div>
         </div>
 
+        {/* Mobile Search Bar */}
+        {showMobileSearch && (
+          <div className="mobile-search-bar">
+            <form onSubmit={handleSearchSubmit} className="mobile-search-form">
+              <input
+                ref={searchRef}
+                type="text"
+                className="mobile-search-input"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              <button type="submit" className="mobile-search-submit">
+                <FaSearch />
+              </button>
+              <button 
+                type="button" 
+                className="mobile-search-close"
+                onClick={() => setShowMobileSearch(false)}
+              >
+                <FaTimes />
+              </button>
+            </form>
+          </div>
+        )}
+
         {/* BOTTOM ROW: category links */}
         <nav className="navbar-bottom">
           <div className="nav-left">
-            <Link onClick={props.handleClick} to="/">
+            <Link onClick={handleClick} to="/">
               <img
                 src={logo}
                 alt="Logo"  
