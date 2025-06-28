@@ -258,7 +258,7 @@
   font-weight: 500;
 }
 
-/* ENHANCED PRODUCTS GRID WITH WIDER IMAGES */
+/* ENHANCED PRODUCTS GRID WITH MODERATELY WIDER IMAGES */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -283,11 +283,11 @@
   border-color: rgba(0, 123, 255, 0.2);
 }
 
-/* MUCH WIDER PRODUCT IMAGES */
+/* MODERATELY WIDER PRODUCT IMAGES - REDUCED FROM 420px */
 .products-grid .product-image {
   position: relative;
   width: 100%;
-  height: 420px; /* Significantly increased for wallpaper showcase */
+  height: 320px; /* Reduced from 420px to 320px for better proportion */
   overflow: hidden;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
@@ -861,9 +861,9 @@
     z-index: 999;
   }
   
-  /* Maintain wide images on tablets */
+  /* Maintain good proportions on tablets */
   .products-grid .product-image {
-    height: 360px;
+    height: 280px; /* Reduced from 360px */
   }
 }
 
@@ -887,9 +887,9 @@
     gap: 20px;
   }
   
-  /* Still wide on mobile */
+  /* Good proportions on mobile */
   .products-grid .product-image {
-    height: 320px;
+    height: 260px; /* Reduced from 320px */
   }
   
   .products-grid .product-info {
@@ -932,9 +932,9 @@
     gap: 16px;
   }
   
-  /* Maintain reasonable width even on small screens */
+  /* Maintain reasonable proportions even on small screens */
   .products-grid .product-image {
-    height: 280px;
+    height: 240px; /* Reduced from 280px */
   }
   
   .products-grid .product-info {
@@ -962,7 +962,7 @@
   }
 }
 
-/* Large screens - extra wide images */
+/* Large screens - moderately wide images */
 @media (min-width: 1200px) {
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -970,7 +970,7 @@
   }
   
   .products-grid .product-image {
-    height: 480px; /* Extra wide on large screens */
+    height: 360px; /* Reduced from 480px to 360px */
   }
   
   .products-grid .product-info {
