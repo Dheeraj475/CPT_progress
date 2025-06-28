@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FaUserCircle,
   FaShoppingCart,
@@ -82,6 +82,7 @@ const Navbar = ({ handleClick, onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const isMobile = window.innerWidth < 768;
+  const navigate = useNavigate();
 
   const { isAuthenticated, user, logout } = useAuth();
   const { getCartItemsCount, wishlistItems } = useCart();
@@ -106,8 +107,11 @@ const Navbar = ({ handleClick, onSearch }) => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchQuery.trim() && onSearch) {
-      onSearch(searchQuery.trim());
+    if (searchQuery.trim()) {
+      // Navigate to products page with search query
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setShowMobileSearch(false);
+      setSearchQuery('');
     }
   };
 

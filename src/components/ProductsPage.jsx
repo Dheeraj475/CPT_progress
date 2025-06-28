@@ -1,8 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import '../assets/ProductsPage.css';
 
 const ProductsPage = ({ allProducts }) => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get('search') || '';
+
   const [filters, setFilters] = useState({
     category: '',
     priceRange: [0, 10000],
@@ -24,13 +29,20 @@ const ProductsPage = ({ allProducts }) => {
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = allProducts.filter(product => {
+      // Search filter
+      const searchMatch = !searchQuery || 
+        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchQuery.toLowerCase());
+
       const categoryMatch = !filters.category || product.category === filters.category;
       const priceMatch = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
       const ratingMatch = product.rating >= filters.rating;
       const brandMatch = !filters.brand || product.brand === filters.brand;
       const stockMatch = !filters.inStock || product.inStock;
       
-      return categoryMatch && priceMatch && ratingMatch && brandMatch && stockMatch;
+      return searchMatch && categoryMatch && priceMatch && ratingMatch && brandMatch && stockMatch;
     });
 
     // Sort products
@@ -54,7 +66,12 @@ const ProductsPage = ({ allProducts }) => {
     }
 
     return filtered;
-  }, [allProducts, filters, sortBy]);
+  }, [allProducts, filters, sortBy, searchQuery]);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters, sortBy, searchQuery]);
 
   // Pagination
   const totalPages = Math.ceil(filteredAndSortedProducts.length / productsPerPage);
@@ -92,8 +109,11 @@ const ProductsPage = ({ allProducts }) => {
       <div className="products-header">
         <div className="breadcrumb">
           <span>Home</span> > <span>Products</span>
+          {searchQuery && <span> > Search: "{searchQuery}"</span>}
         </div>
-        <h1>All Products</h1>
+        <h1>
+          {searchQuery ? `Search Results for "${searchQuery}"` : 'All Products'}
+        </h1>
         <p>Showing {filteredAndSortedProducts.length} of {allProducts.length} products</p>
       </div>
 
@@ -417,7 +437,12 @@ const ProductsPage = ({ allProducts }) => {
             <div className="no-products">
               <div className="no-products-icon">📦</div>
               <h3>No products found</h3>
-              <p>Try adjusting your filters or search criteria</p>
+              <p>
+                {searchQuery 
+                  ? `No products found for "${searchQuery}". Try adjusting your search or filters.`
+                  : 'Try adjusting your filters or search criteria'
+                }
+              </p>
               <button onClick={clearAllFilters} className="reset-filters-btn">
                 Reset All Filters
               </button>
