@@ -5,7 +5,7 @@ import LoginPrompt from './LoginPrompt';
 import '../assets/ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const { addToCart, addToWishlist, wishlistItems } = useCart();
+  const { addToCart, addToWishlist, removeFromWishlist, wishlistItems } = useCart();
   const { isAuthenticated } = useAuth();
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [loginMessage, setLoginMessage] = useState('');
@@ -21,13 +21,16 @@ const ProductCard = ({ product }) => {
     addToCart(product);
   };
 
-  const handleAddToWishlist = () => {
+  const handleToggleWishlist = () => {
     if (!isAuthenticated) {
       setLoginMessage('Please login to add items to wishlist');
       setShowLoginPrompt(true);
       return;
     }
-    if (!isInWishlist) {
+    
+    if (isInWishlist) {
+      removeFromWishlist(product.id);
+    } else {
       addToWishlist(product);
     }
   };
@@ -46,7 +49,8 @@ const ProductCard = ({ product }) => {
           <img src={product.img || product.image} alt={product.title || product.name} />
           <button 
             className={`wishlist-btn ${isInWishlist ? 'in-wishlist' : ''}`}
-            onClick={handleAddToWishlist}
+            onClick={handleToggleWishlist}
+            title={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
           >
             {isInWishlist ? '❤️' : '🤍'}
           </button>
