@@ -1,105 +1,32 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import ProductCard from './ProductCard';
-import '../assets/ProductsPage.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import '../assets/ProductCard.css';
 
-const ProductsPage = ({ allProducts }) => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const searchQuery = searchParams.get('search') || '';
+const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
-  // ✅ Filter out undefined/null/invalid products
-  const safeProducts = Array.isArray(allProducts)
-    ? allProducts.filter(p => p && typeof p === 'object')
-    : [];
+  if (!product) {
+    return null;
+  }
 
-  const [filters, setFilters] = useState({
-    category: '',
-    priceRange: [0, 10000],
-    rating: 0,
-    brand: '',
-    inStock: false
-  });
-
-  const [sortBy, setSortBy] = useState('popularity');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showFilters, setShowFilters] = useState(false);
-  const productsPerPage = 12;
-
-  const categories = [...new Set(safeProducts.map(p => p.category))].filter(Boolean);
-  const brands = [...new Set(safeProducts.map(p => p.brand))].filter(Boolean);
-  const maxPrice = Math.max(...safeProducts.map(p => p.price || 0));
-
-  const filteredAndSortedProducts = useMemo(() => {
-    let filtered = safeProducts.filter(product => {
-      if (!product) return false;
-
-      const searchMatch =
-        !searchQuery ||
-        (product.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (product.subtitle || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (product.desc || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (product.category || '').toLowerCase().includes(searchQuery.toLowerCase());
-
-      const categoryMatch = !filters.category || product.category === filters.category;
-      const priceMatch =
-        product.price >= filters.priceRange[0] &&
-        product.price <= filters.priceRange[1];
-      const ratingMatch = product.rating >= filters.rating;
-      const brandMatch = !filters.brand || product.brand === filters.brand;
-      const stockMatch = !filters.inStock || product.inStock;
-
-      return searchMatch && categoryMatch && priceMatch && ratingMatch && brandMatch && stockMatch;
-    });
-
-    switch (sortBy) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'rating':
-        filtered.sort((a, b) => b.rating - a.rating);
-        break;
-      case 'newest':
-        filtered.sort((a, b) => b.id - a.id);
-        break;
-      case 'popularity':
-      default:
-        filtered.sort((a, b) => b.reviews - a.reviews);
-        break;
-    }
-
-    return filtered;
-  }, [safeProducts, filters, sortBy, searchQuery]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filters, sortBy, searchQuery]);
-
-  const totalPages = Math.ceil(filteredAndSortedProducts.length / productsPerPage);
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const currentProducts = filteredAndSortedProducts.slice(startIndex, startIndex + productsPerPage);
-
-  const handleFilterChange = (filterType, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterType]: value
-    }));
-    setCurrentPage(1);
-  };
-
-  const clearAllFilters = () => {
-    setFilters({
-      category: '',
-      priceRange: [0, maxPrice],
-      rating: 0,
-      brand: '',
-      inStock: false
-    });
-    setCurrentPage(1);
-  };
+  const {
+    id,
+    title,
+    subtitle,
+    price,
+    originalPrice,
+    discount,
+    rating,
+    reviews,
+    images = [],
+    inStock = true,
+    category,
+    brand
+  } = product;
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {
@@ -108,229 +35,158 @@ const ProductsPage = ({ allProducts }) => {
     }).format(price);
   };
 
-  return (
-    <div className="products-page">
-      <div className="products-header">
-        <div className="breadcrumb">
-          <span>Home</span> > <span>Products</span>
-          {searchQuery && <span> > Search: "{searchQuery}"</span>}
-        </div>
-        <h1>
-          {searchQuery ? `Search Results for "${searchQuery}"` : 'All Products'}
-        </h1>
-        <p>Showing {filteredAndSortedProducts.length} of {safeProducts.length} products</p>
-      </div>
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    addToCart(product);
+  };
 
-      <div className="products-container">
+  const handleWishlistToggle = (e) => {
+    e.stopPropagation();
+    setIsWishlisted(!isWishlisted);
+  };
+
+  const handleCardClick = () => {
+    navigate(`/product/${id}`);
+  };
+
+  const handleImageNavigation = (direction, e) => {
+    e.stopPropagation();
+    if (direction === 'next') {
+      setCurrentImageIndex((prev) => 
+        prev === images.length - 1 ? 0 : prev + 1
+      );
+    } else {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? images.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<span key={i} className="star filled">★</span>);
+    }
+
+    if (hasHalfStar) {
+      stars.push(<span key="half" className="star half">★</span>);
+    }
+
+    const remainingStars = 5 - Math.ceil(rating);
+    for (let i = 0; i < remainingStars; i++) {
+      stars.push(<span key={`empty-${i}`} className="star empty">☆</span>);
+    }
+
+    return stars;
+  };
+
+  return (
+    <div className="product-card" onClick={handleCardClick}>
+      <div className="product-image-container">
+        {images.length > 0 ? (
+          <>
+            <img
+              src={images[currentImageIndex]}
+              alt={title}
+              className="product-image"
+              loading="lazy"
+            />
+            {images.length > 1 && (
+              <>
+                <button
+                  className="image-nav prev"
+                  onClick={(e) => handleImageNavigation('prev', e)}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button
+                  className="image-nav next"
+                  onClick={(e) => handleImageNavigation('next', e)}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+                <div className="image-indicators">
+                  {images.map((_, index) => (
+                    <span
+                      key={index}
+                      className={`indicator ${index === currentImageIndex ? 'active' : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(index);
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <div className="no-image">
+            <span>No Image</span>
+          </div>
+        )}
+
         <button
-          className="mobile-filter-toggle"
-          onClick={() => setShowFilters(!showFilters)}
+          className={`wishlist-btn ${isWishlisted ? 'active' : ''}`}
+          onClick={handleWishlistToggle}
+          aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
         >
-          🔧 Filters & Sort
+          {isWishlisted ? '❤️' : '🤍'}
         </button>
 
-        <div className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
-          <div className="filters-header">
-            <h3>Filters</h3>
-            <button onClick={clearAllFilters} className="clear-filters">
-              Clear All
-            </button>
+        {discount && (
+          <div className="discount-badge">
+            -{discount}%
           </div>
+        )}
 
-          <div className="filters-content">
-            <div className="filter-group">
-              <h4>Category</h4>
-              <div className="filter-options">
-                <label>
-                  <input
-                    type="radio"
-                    name="category"
-                    value=""
-                    checked={filters.category === ''}
-                    onChange={(e) => handleFilterChange('category', e.target.value)}
-                  />
-                  All Categories
-                </label>
-                {categories.map(category => (
-                  <label key={category}>
-                    <input
-                      type="radio"
-                      name="category"
-                      value={category}
-                      checked={filters.category === category}
-                      onChange={(e) => handleFilterChange('category', e.target.value)}
-                    />
-                    {typeof category === 'string' ? category.replace('-', ' ').toUpperCase() : category}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Price Range</h4>
-              <div className="price-range">
-                <input
-                  type="range"
-                  min="0"
-                  max={maxPrice}
-                  value={filters.priceRange[1]}
-                  onChange={(e) =>
-                    handleFilterChange('priceRange', [0, parseInt(e.target.value)])
-                  }
-                  className="price-slider"
-                />
-                <div className="price-display">
-                  {formatPrice(0)} - {formatPrice(filters.priceRange[1])}
-                </div>
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Customer Rating</h4>
-              <div className="filter-options">
-                {[4, 3, 2, 1, 0].map(rating => (
-                  <label key={rating}>
-                    <input
-                      type="radio"
-                      name="rating"
-                      value={rating}
-                      checked={filters.rating === rating}
-                      onChange={(e) => handleFilterChange('rating', parseInt(e.target.value))}
-                    />
-                    {rating > 0 ? `${rating}★ & above` : 'All Ratings'}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Brand</h4>
-              <div className="filter-options">
-                <label>
-                  <input
-                    type="radio"
-                    name="brand"
-                    value=""
-                    checked={filters.brand === ''}
-                    onChange={(e) => handleFilterChange('brand', e.target.value)}
-                  />
-                  All Brands
-                </label>
-                {brands.map(brand => (
-                  <label key={brand}>
-                    <input
-                      type="radio"
-                      name="brand"
-                      value={brand}
-                      checked={filters.brand === brand}
-                      onChange={(e) => handleFilterChange('brand', e.target.value)}
-                    />
-                    {brand}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h4>Availability</h4>
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={filters.inStock}
-                  onChange={(e) => handleFilterChange('inStock', e.target.checked)}
-                />
-                In Stock Only
-              </label>
-            </div>
+        {!inStock && (
+          <div className="out-of-stock-overlay">
+            <span>Out of Stock</span>
           </div>
-        </div>
-
-        <div className="products-content">
-          <div className="sort-bar">
-            <div className="sort-options">
-              <label>Sort by:</label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="sort-select"
-              >
-                <option value="popularity">Popularity</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Customer Rating</option>
-                <option value="newest">Newest First</option>
-              </select>
-            </div>
-            <div className="results-count">
-              {filteredAndSortedProducts.length} products found
-            </div>
-          </div>
-
-          {currentProducts.length === 0 ? (
-            <div className="no-products">
-              <div className="no-products-icon">📦</div>
-              <h3>No products found</h3>
-              <p>
-                {searchQuery
-                  ? `No products found for "${searchQuery}". Try adjusting your search or filters.`
-                  : 'Try adjusting your filters or search criteria'}
-              </p>
-              <button onClick={clearAllFilters} className="reset-filters-btn">
-                Reset All Filters
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="products-grid">
-                {currentProducts.map(product => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-
-              {totalPages > 1 && (
-                <div className="pagination">
-                  <button
-                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                    disabled={currentPage === 1}
-                    className="pagination-btn"
-                  >
-                    ← Previous
-                  </button>
-
-                  <div className="pagination-numbers">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                      <button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={`pagination-number ${currentPage === page ? 'active' : ''}`}
-                      >
-                        {page}
-                      </button>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                    disabled={currentPage === totalPages}
-                    className="pagination-btn"
-                  >
-                    Next →
-                  </button>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+        )}
       </div>
 
-      {showFilters && (
-        <div
-          className="mobile-filter-overlay"
-          onClick={() => setShowFilters(false)}
-        />
-      )}
+      <div className="product-info">
+        <div className="product-category">{category}</div>
+        <h3 className="product-title">{title}</h3>
+        {subtitle && <p className="product-subtitle">{subtitle}</p>}
+        
+        <div className="product-rating">
+          <div className="stars">
+            {renderStars(rating)}
+          </div>
+          <span className="rating-text">
+            {rating} ({reviews} reviews)
+          </span>
+        </div>
+
+        <div className="product-pricing">
+          <span className="current-price">{formatPrice(price)}</span>
+          {originalPrice && originalPrice > price && (
+            <span className="original-price">{formatPrice(originalPrice)}</span>
+          )}
+        </div>
+
+        {brand && <div className="product-brand">by {brand}</div>}
+
+        <div className="product-actions">
+          <button
+            className={`add-to-cart-btn ${!inStock ? 'disabled' : ''}`}
+            onClick={handleAddToCart}
+            disabled={!inStock}
+          >
+            {inStock ? 'Add to Cart' : 'Out of Stock'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ProductsPage;
+export default ProductCard;
