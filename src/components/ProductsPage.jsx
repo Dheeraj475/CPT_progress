@@ -33,10 +33,10 @@ const ProductsPage = ({ allProducts }) => {
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = allProducts.filter(product => {
       const searchMatch = !searchQuery || 
-        (product.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (product.subtitle || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (product.desc || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (product.category || '').toLowerCase().includes(searchQuery.toLowerCase());
+        (product.title || '').toLowerCase().includes(String(searchQuery).toLowerCase()) ||
+        (product.subtitle || '').toLowerCase().includes(String(searchQuery).toLowerCase()) ||
+        (product.desc || '').toLowerCase().includes(String(searchQuery).toLowerCase()) ||
+        (product.category || '').toLowerCase().includes(String(searchQuery).toLowerCase());
 
       const categoryMatch = !filters.category || product.category === filters.category;
       const priceMatch = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
