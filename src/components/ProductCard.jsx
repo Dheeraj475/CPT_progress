@@ -13,6 +13,11 @@ const ProductCard = ({ product }) => {
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
 
+  // Ensure string properties are properly converted to strings
+  const productTitle = String(product.title || '');
+  const productSubtitle = String(product.subtitle || '');
+  const productDesc = String(product.desc || '');
+
   const images = product.images || [product.img];
   const isInWishlist = wishlistItems.some(item => item.id === product.id);
 
@@ -95,7 +100,7 @@ const ProductCard = ({ product }) => {
             >
               {images.map((image, index) => (
                 <div key={index} className="carousel-slide">
-                  <img src={image} alt={`${product.title} ${index + 1}`} />
+                  <img src={image} alt={`${productTitle} ${index + 1}`} />
                 </div>
               ))}
             </div>
@@ -145,9 +150,9 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="product-info">
-        <h4>{product.subtitle}</h4>
-        <h3>{product.title}</h3>
-        <p>{product.desc}</p>
+        <h4>{productSubtitle}</h4>
+        <h3>{productTitle}</h3>
+        <p>{productDesc}</p>
         
         {product.rating && (
           <div className="product-rating">
