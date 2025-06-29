@@ -203,4 +203,7 @@ const ProductCard = ({ product }) => {
   );
 };
 
+// Explicitly set displayName to help vite:react-swc plugin
+ProductCard.displayName = 'ProductCard';
+
 export default ProductCard;
