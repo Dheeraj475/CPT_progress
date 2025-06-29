@@ -52,7 +52,10 @@ const ProductsPage = ({ allProducts = [] }) => {
         product.category
       ].some(field => {
         if (!field) return false;
-        return String(field).toLowerCase().includes(String(searchQuery).toLowerCase());
+        const fieldAsString = String(field || '');
+        const lowerCaseField = fieldAsString.toLowerCase();
+        const lowerCaseSearchQuery = String(searchQuery || '').toLowerCase();
+        return lowerCaseField.includes(lowerCaseSearchQuery);
       });
 
       const categoryMatch = !filters.category || product.category === filters.category;
