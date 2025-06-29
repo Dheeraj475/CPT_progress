@@ -52,10 +52,9 @@ const ProductsPage = ({ allProducts = [] }) => {
         product.category
       ].some(field => {
         if (!field) return false;
-        const fieldAsString = String(field || '');
-        const lowerCaseField = fieldAsString.toLowerCase();
-        const lowerCaseSearchQuery = String(searchQuery || '').toLowerCase();
-        return lowerCaseField.includes(lowerCaseSearchQuery);
+        const fieldStr = String(field);
+        const queryStr = String(searchQuery);
+        return fieldStr.toLowerCase().indexOf(queryStr.toLowerCase()) !== -1;
       });
 
       const categoryMatch = !filters.category || product.category === filters.category;
@@ -137,12 +136,17 @@ const ProductsPage = ({ allProducts = [] }) => {
     );
   }
 
+  const renderCategoryName = (category) => {
+    if (typeof category !== 'string') return category;
+    return category.replace('-', ' ').toUpperCase();
+  };
+
   return (
     <div className="products-page">
       <div className="products-header">
         <div className="breadcrumb">
-          <span>Home</span> > <span>Products</span>
-          {searchQuery && <span> > Search: "{searchQuery}"</span>}
+          <span>Home</span> &gt; <span>Products</span>
+          {searchQuery && <span> &gt; Search: &quot;{searchQuery}&quot;</span>}
         </div>
         <h1>
           {searchQuery ? `Search Results for "${searchQuery}"` : 'All Products'}
@@ -156,7 +160,7 @@ const ProductsPage = ({ allProducts = [] }) => {
           className="mobile-filter-toggle"
           onClick={() => setShowFilters(!showFilters)}
         >
-          🔧 Filters & Sort
+          🔧 Filters &amp; Sort
         </button>
 
         {/* Filters Sidebar */}
@@ -192,7 +196,7 @@ const ProductsPage = ({ allProducts = [] }) => {
                       checked={filters.category === category}
                       onChange={(e) => handleFilterChange('category', e.target.value)}
                     />
-                    {typeof category === 'string' ? category.replace('-', ' ').toUpperCase() : category}
+                    {renderCategoryName(category)}
                   </label>
                 ))}
               </div>
@@ -373,8 +377,5 @@ const ProductsPage = ({ allProducts = [] }) => {
     </div>
   );
 };
-
-// Set displayName immediately after component definition
-ProductsPage.displayName = 'ProductsPage';
 
 export default ProductsPage;
