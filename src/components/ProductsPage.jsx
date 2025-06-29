@@ -49,7 +49,6 @@ const ProductsPage = ({ allProducts = [] }) => {
         product.title,
         product.subtitle,
         product.desc,
-        product.description,
         product.category
       ].some(field => {
         if (!field) return false;
