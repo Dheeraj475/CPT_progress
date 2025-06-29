@@ -1,16 +1,15 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import '../assets/ContackForm.css';
 import FormImage from '../assets/images/form-image.jpg';
 
-
 function ContackForm() {
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,8 +31,6 @@ function ContackForm() {
       setSuccessMessage("Form submitted successfully!");
       setErrorMessage("");
       console.log("Form submitted:", formData);
-  
-     
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage("Something went wrong. Please try again.");
@@ -50,71 +47,72 @@ function ContackForm() {
         />
       </div>
       <div className="sustainability-content">
-      <div className="contact-form">
-      <div className="form-container">
-      <h2 className="form-title">Contact Us</h2>
+        <div className="contact-form">
+          <div className="form-container">
+            <h2 className="form-title">Contact Us</h2>
 
-      {errorMessage && <p className="form-error">{errorMessage}</p>}
+            {errorMessage && <p className="form-error">{errorMessage}</p>}
+            {successMessage && <p className="form-success">{successMessage}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="firstName" className="form-label">First Name :</label>
-            <input
-              type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              className="form-input"
-              placeholder="Enter your first name"
-              required
-            />
+            <form onSubmit={handleSubmit}>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="firstName" className="form-label">First Name :</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="form-input"
+                    placeholder="Enter your first name"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="lastName" className="form-label">Last Name :</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="form-input"
+                    placeholder="Enter your last name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">Email :</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-input"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phoneNumber" className="form-label">Phone Number :</label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="form-input"
+                  placeholder="Enter your phone number"
+                  required
+                />
+              </div>
+
+              <button type="submit" className="form-button">Submit</button>
+            </form>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="lastName" className="form-label">Last Name :</label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              className="form-input"
-              placeholder="Enter your last name"
-              required
-            />
-          </div>
-          </div>
-
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">Email :</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="form-input"
-            placeholder="Enter your email"
-            required
-          />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="phoneNumber" className="form-label">Phone Number :</label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            className="form-input"
-            placeholder="Enter your phone number"
-            required
-          />
-        </div>
-
-        <button type="submit" className="form-button">Submit</button>
-      </form>
-    </div>
-    </div>
       </div>
     </section>
   );
