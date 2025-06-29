@@ -374,7 +374,7 @@ const ProductsPage = ({ allProducts = [] }) => {
   );
 };
 
-// Explicitly set displayName to help vite:react-swc plugin
+// Set displayName immediately after component definition
 ProductsPage.displayName = 'ProductsPage';
 
 export default ProductsPage;
